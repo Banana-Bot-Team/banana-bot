@@ -17,12 +17,14 @@ global.BossWeaponsData = require('./data/BossWeapons');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.ts'));
 
 for (const file of commandFiles) {
-  import(`./commands/${file}`).then(function(commands: any) {
-    commands = commands?.default;
-    if (Array.isArray(commands)) {
-      commands.forEach((c: any) => client.commands?.set(c.name, c));
+  import(`./commands/${file}`).then(function(commands: { default: Command | Array<Command> }) {
+    const cs = commands.default;
+    if (Array.isArray(cs)) {
+      cs.forEach(function(c) {
+        client.commands?.set(c.name, c);
+      });
     } else {
-      client.commands?.set(commands.name, commands);
+      client.commands?.set(cs.name, cs);
     }
   });
 }
@@ -88,4 +90,15 @@ declare global {
 
 export interface CustomClient extends Discord.Client {
   commands?: Discord.Collection<any, any>;
+}
+
+export interface Command {
+  name: string;
+  group: string;
+  args: boolean;
+  usage: string;
+  aliases: Array<string>;
+  description: string;
+  hidden: boolean;
+  execute: (message: Discord.Message, args?: Array<string>) => void;
 }

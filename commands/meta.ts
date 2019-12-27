@@ -11,7 +11,7 @@ import {
   TextChannel
 } from 'discord.js';
 import * as moment from 'moment-timezone';
-import { CustomClient } from '..';
+import { CustomClient, Command } from '..';
 
 // Command Group Name
 const group = path.parse(__filename).name;
@@ -26,7 +26,7 @@ const help = {
     const user = message.client.user;
     const orderedCommands: any = {};
     const commands: any = { uncategorized: [] };
-    (message.client as CustomClient)?.commands?.forEach((c: any) => {
+    (message.client as CustomClient)?.commands?.forEach(function(c) {
       if (c.group) {
         c.group in commands ? commands[c.group].push(c) : (commands[c.group] = [c]);
       } else {
@@ -35,11 +35,15 @@ const help = {
     });
     Object.keys(commands)
       .sort()
-      .forEach(key => {
+      .forEach(function(key) {
         const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
         orderedCommands[capitalizedKey] = commands[key]
-          .sort((a: any, b: any) => (a.name > b.name ? 1 : -1))
-          .filter((c: any) => !c.hidden);
+          .sort(function(a: Command, b: Command) {
+            return a.name > b.name ? 1 : -1;
+          })
+          .filter(function(c: Command) {
+            return !c.hidden;
+          });
       });
 
     const embed = new RichEmbed()
@@ -47,10 +51,10 @@ const help = {
       .setThumbnail(user.avatarURL)
       .setDescription('All commands can be abbreviated')
       .setTimestamp();
-    Object.keys(orderedCommands).forEach(k => {
+    Object.keys(orderedCommands).forEach(function(k) {
       if (orderedCommands[k].length > 0) {
         embed.addField('Group', `**${k}**`);
-        orderedCommands[k].forEach((c: any) => {
+        orderedCommands[k].forEach(function(c: Command) {
           const prefix = process.env.PREFIX;
           let commandName = `${prefix}${c.name}`;
           if (c.aliases) {
