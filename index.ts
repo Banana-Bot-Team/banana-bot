@@ -7,7 +7,7 @@ import * as fs from 'fs';
 import * as Discord from 'discord.js';
 const client: CustomClient = new Discord.Client();
 // Command Prefix
-const prefix = process.env.PREFIX || '!!';
+const prefix = process.env.PREFIX ?? '!!';
 
 client.commands = new Discord.Collection();
 

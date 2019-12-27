@@ -55,7 +55,7 @@ const help = {
       if (orderedCommands[k].length > 0) {
         embed.addField('Group', `**${k}**`);
         orderedCommands[k].forEach(function(c: Command) {
-          const prefix = process.env.PREFIX;
+          const prefix = process.env.PREFIX ?? '!!';
           let commandName = `${prefix}${c.name}`;
           if (c.aliases) {
             commandName = `${commandName}, ` + c.aliases.map((a: any) => `${prefix}${a}`).join(', ');
