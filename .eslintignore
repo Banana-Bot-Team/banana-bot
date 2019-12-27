@@ -1,0 +1,11 @@
+node_modules
+.DS_Store
+
+**/*.d.ts
+**/*.js.map
+**/*.js
+
+!src/decorators/**/*.d.ts
+
+dist
+build

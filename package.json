@@ -1,0 +1,24 @@
+{
+  "name": "banana-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node src"
+  },
+  "author": "KaKa",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.2.0",
+    "moment-timezone": "^0.5.27",
+    "pm2": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/moment-timezone": "^0.5.12",
+    "@types/node": "^13.1.0",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  }
+}
