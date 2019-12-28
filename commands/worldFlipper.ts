@@ -60,23 +60,23 @@ function getInfoEmbed(unit: any) {
   return new RichEmbed()
     .setTitle(unit.CNName + ' ' + unit.JPName)
     .setDescription(
-      '**Attribute: **' +
+      '**屬性: **' +
         unit.CNAttribute +
         ' ' +
         unit.ENAttribute +
-        '\n**Leader Skill: **' +
+        '\n**隊長特性: **' +
         unit.CNLeaderBuff +
-        '\n**Active Skill: **' +
+        '\n**技能: **' +
         unit.CNSkillName +
         (unit.SkillCost ? ' **Cost: **' + unit.SkillCost : '') +
         '\n' +
         unit.CNSkillDesc +
-        '\n**Rarity: **' +
+        '\n**稀有度: **' +
         rarity
     )
-    .addField('Ability 1', unit.CNAbility1, true)
-    .addField('Ability 2', unit.CNAbility2, true)
-    .addField('Ability 3', unit.CNAbility3, true)
+    .addField('能力 1', unit.CNAbility1, true)
+    .addField('能力 2', unit.CNAbility2, true)
+    .addField('能力 3', unit.CNAbility3, true)
     .setThumbnail(unit.SpriteURL)
     .setFooter(unit.CNRole);
   // .setFooter(unit.CNRole ? unit.Weapon + ' / ' + unit.CNRole : unit.Weapon);
