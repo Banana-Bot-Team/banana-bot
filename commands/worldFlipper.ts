@@ -214,7 +214,7 @@ const tls = {
 
 const INVALID_CHAR: Array<RegExp> = [
   /%/g,
-  /\_/g
+  /_/g
 ]
 
 
