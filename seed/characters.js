@@ -68,7 +68,7 @@ function characters() {
 
         obj.JPAttribute = JPAttribute;
 
-        obj.ENName = ENName;
+        obj.ENName = String(ENName).toLowerCase();
         obj.ENRole = ENRole;
         obj.ENAttribute = ENAttribute;
         obj.ENLeaderBuff = ENLeaderBuff;
