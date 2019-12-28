@@ -5,12 +5,12 @@ async function patch() {
  characters.forEach(async function(character, index) {
     // if(character.JPName === "カリオストロ") console.log(character)
     try {
-      const res = await axios.get(`http://45.77.131.110:8080/characters/lookup?name=${encodeURIComponent(character.JPName)}`)
+      const res = await axios.get(`http://localhost:8080/characters/lookup?name=${encodeURIComponent(character.JPName)}`)
       console.log(character.JPName)
       const data = res.data
       if(data.length > 0) {
         console.log( data[0].id )
-        await axios.put(`http://45.77.131.110:8080/characters/${data[0].id}`, character);
+        await axios.put(`http://localhost:8080/characters/${data[0].id}`, character);
       }
     } catch (err) {
       console.log(err);
