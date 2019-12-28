@@ -227,7 +227,8 @@ const character = {
     const data = res.data;
 
     if (data.length === 0) {
-      if (chara === 'banana' || chara == '拔娜娜') return message.channel.send('請別輸入奇怪的東西!!');
+      // Use includes
+      if (chara.includes('banana') || chara.includes('拔娜娜')) return message.channel.send('請別輸入奇怪的東西!!');
       return message.channel.send('找不到辣!');
     }
 
