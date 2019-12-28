@@ -11,6 +11,7 @@ import {
   Channel,
   TextChannel
 } from 'discord.js';
+import * as moment from 'moment-timezone';
 
 // Command Group Name
 const group = path.parse(__filename).name;
@@ -155,7 +156,13 @@ const rotation = {
       './assets/charts/thunder.png',
       './assets/charts/dark.png'
     ];
-    let dayOfWeek = new Date().getDay();
+    moment.tz.setDefault('GMT');
+    const monentW = String(
+      moment()
+        .add(4, 'h')
+        .format('ddd')
+    ).toLowerCase();
+    let dayOfWeek = DAYOFWEEK[monentW];
     if (Array.isArray(args) && args.length > 0) {
       // replace chinese mutation
       let arg = String(args[0]).toLowerCase();
