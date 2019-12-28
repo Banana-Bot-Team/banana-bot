@@ -171,24 +171,36 @@ const rotation = {
   }
 };
 
-const guide = {
-  name: 'guide',
-  group,
-  aliases: ['g', 'beginner'],
-  description: "Links LilyCat's Beginner Progression Guide.",
-  execute(message: Message) {
-    const guideLink = 'https://docs.google.com/document/d/1kOxR6SSj7TB564OI4f-nZ-tX2JioyoBGEK_a498Swcc/edit';
-    return message.channel.send(`The Beginner Progression Guide can be found here:\n${guideLink}`);
-  }
-};
+// const guide = {
+//   name: 'guide',
+//   group,
+//   aliases: ['g', 'beginner'],
+//   description: "Links LilyCat's Beginner Progression Guide.",
+//   execute(message: Message) {
+//     const guideLink = 'https://docs.google.com/document/d/1kOxR6SSj7TB564OI4f-nZ-tX2JioyoBGEK_a498Swcc/edit';
+//     return message.channel.send(`The Beginner Progression Guide can be found here:\n${guideLink}`);
+//   }
+// };
+
+// const tls = {
+//   name: 'translations',
+//   group,
+//   aliases: ['tl', 'translation'],
+//   description: "Links Doli's Translation Sheet.",
+//   execute(message: Message) {
+//     const tlDocLink = 'https://docs.google.com/spreadsheets/d/1moWhlsmAFkmItRJPrhhi9qCYu8Y93sXGyS1ZBo2L38c/edit';
+//     return message.channel.send(`The main translation document can be found here:\n${tlDocLink}`);
+//   }
+// };
 
 const tls = {
   name: 'translations',
   group,
   aliases: ['tl', 'translation'],
-  description: "Links Doli's Translation Sheet.",
+  description: 'Links Translation Sheet.',
   execute(message: Message) {
-    const tlDocLink = 'https://docs.google.com/spreadsheets/d/1moWhlsmAFkmItRJPrhhi9qCYu8Y93sXGyS1ZBo2L38c/edit';
+    const tlDocLink =
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5OvhecdUnTXEeO2fpdERfiZh3PzadSoGcpQ1IEhAPCSfcv2iLk7p0V7MFiZ7AZNnPVRSzUsRI5Wye/pubhtml#';
     return message.channel.send(`The main translation document can be found here:\n${tlDocLink}`);
   }
 };
@@ -252,4 +264,4 @@ const character = {
   }
 };
 
-export default [rotation, guide, tls, character];
+export default [rotation, tls, character];
