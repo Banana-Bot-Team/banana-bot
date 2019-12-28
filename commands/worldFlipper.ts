@@ -201,8 +201,7 @@ const tls = {
   execute(message: Message) {
     const tlDocLink =
       'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5OvhecdUnTXEeO2fpdERfiZh3PzadSoGcpQ1IEhAPCSfcv2iLk7p0V7MFiZ7AZNnPVRSzUsRI5Wye/pubhtml#';
-    return message.channel.send(
-      new RichEmbed().setTitle('中文翻譯連結').setURL(tlDocLink));
+    return message.channel.send(new RichEmbed().setTitle('中文翻譯連結').setURL(tlDocLink));
   }
 };
 
@@ -214,17 +213,21 @@ const character = {
   aliases: ['c', 'char'],
   description: '查詢角色資訊',
   async execute(message: Message, args: Array<string>) {
-    const chara = args.length ? args.join(' ').toLowerCase() : '';
+    let chara = args.length ? args.join(' ').toLowerCase() : '';
     if (chara.length < 2) {
       return message.channel.send('請最少輸入2個字!');
+    }
+
+    // Allow Emoji
+    if (chara.startsWith('<') && chara.endsWith('>')) {
+      const matches = Array.from(chara.match(/<:(.+?):.+?>/) ?? []);
+      chara = matches.length === 2 ? `:${matches[1]}:` : '';
     }
     const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
     const data = res.data;
 
     if (data.length === 0) {
-
-      if(chara === 'banana' || chara == '拔娜娜') 
-        return message.channel.send("請別輸入奇怪的東西!!")
+      if (chara === 'banana' || chara == '拔娜娜') return message.channel.send('請別輸入奇怪的東西!!');
       return message.channel.send('找不到辣!');
     }
 
