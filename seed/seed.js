@@ -8,7 +8,7 @@ async function seed() {
     const enCharacters = Array.from(enData);
     characters.forEach(async function(character) {
       const enIndex = enCharacters.findIndex(function(c) {
-        return c.ENName === character.ENName;
+        return c.JPName === character.JPName;
       });
       const {
         CNAttribute,
