@@ -142,7 +142,7 @@ const rotation = {
   group,
   // should not force args
   args: false,
-  usage: '<day of week>',
+  usage: '<Day of week>',
   aliases: ['rot', 'rotations', 'r'],
   description: '查詢素材關',
   execute(message: Message, args: Array<string>) {
@@ -210,7 +210,7 @@ const character = {
   name: 'character',
   group,
   args: true,
-  usage: '<chara name>',
+  usage: '<角色名稱>',
   aliases: ['c', 'char'],
   description: '查詢角色資訊',
   async execute(message: Message, args: Array<string>) {

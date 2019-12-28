@@ -61,9 +61,9 @@ client.on('message', async function(message: Discord.Message) {
     );
 
     if (command.args && !args.length) {
-      let reply = "You didn't provide any arguments!";
+      let reply = "請輸入參數!";
       if (command.usage) {
-        reply += `\nUsage ${prefix}${command.name} ${command.usage}`;
+        reply += `\n用法 ${prefix}${command.name} ${command.usage}`;
       }
 
       return message.channel.send(reply);
