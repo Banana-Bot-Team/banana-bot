@@ -214,9 +214,9 @@ const character = {
   description: '查詢角色資訊',
   async execute(message: Message, args: Array<string>) {
     let chara = args.length ? args.join(' ').toLowerCase() : '';
-    if (chara.length < 2) {
-      return message.channel.send('請最少輸入2個字!');
-    }
+    // if (chara.length < 2) {
+    //   return message.channel.send('請最少輸入2個字!');
+    // }
 
     // Allow Emoji
     if (chara.startsWith('<') && chara.endsWith('>')) {
@@ -225,6 +225,8 @@ const character = {
     }
     const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
     const data = res.data;
+
+    console.log(data);
 
     if (data.length === 0) {
       // Use includes
@@ -238,7 +240,7 @@ const character = {
       }
 
       const nameExact = data.filter(function(char: any) {
-        return char.EnName.toLowerCase() === chara;
+        return char.ENName.toLowerCase() === chara || char.CNName === chara || char.JPName === chara;
       });
 
       if (nameExact.length > 0) {
@@ -247,7 +249,7 @@ const character = {
 
       return data
         .map(function(char: any, index: string) {
-          return `${parseInt(index, 10) + 1}: ${char.EnName} ${char.Weapon}`;
+          return `${parseInt(index, 10) + 1}: ${char.CNName} ${char.CNRole}`;
         })
         .join('\n');
     })();
