@@ -224,6 +224,8 @@ const INVALID_CHAR: Array<RegExp> = [/%/g, /_/g];
 async function characterAttributeSearch(args: Array<string>) {
   let attribute = args.length ? args.join(' ').toLowerCase() : '';
   console.log("Attribute!")
+
+  return { data: [], chara: "" }
 };
 
 const CHARACTER_SEARCH_MAP: { [key: string]: charcterSearchFunction } = {
