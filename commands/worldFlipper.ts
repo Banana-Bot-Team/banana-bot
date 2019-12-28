@@ -144,7 +144,7 @@ const rotation = {
   args: false,
   usage: '<day of week>',
   aliases: ['rot', 'rotations', 'r'],
-  description: 'Shows the daily material dungeon schedule.',
+  description: '查詢素材關',
   execute(message: Message, args: Array<string>) {
     const attachments = [
       './assets/charts/all.png',
