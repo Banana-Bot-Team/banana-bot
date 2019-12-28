@@ -72,6 +72,18 @@ const help = {
   }
 };
 
+const say = {
+  name: 'say',
+  group,
+  args: true,
+  usage: '<anything>',
+  description: 'Say something on behalf of banana.',
+  execute(message: Message, args: Array<string>) {
+    message.delete();
+    message.channel.send(args.join(' '));
+  }
+};
+
 const ping = {
   name: 'ping',
   group,
@@ -83,4 +95,4 @@ const ping = {
   }
 };
 
-export default [help, ping];
+export default [help, ping, say];
