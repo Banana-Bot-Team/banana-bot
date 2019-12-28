@@ -216,19 +216,19 @@ const tls = {
 };
 
 // ---- charater ----
-
-type charcterSearchFunction = (args: Array<string>) => Promise<any>;
+type characterSearchFunction = (args: Array<string>) => Promise<characterSearchResult>;
+type characterSearchResult = { data: any, chara: string };
 
 const INVALID_CHAR: Array<RegExp> = [/%/g, /_/g];
 
-async function characterAttributeSearch(args: Array<string>) {
+const characterAttributeSearch: characterSearchFunction = async (args: Array<string>) => {
   let attribute = args.length ? args.join(' ').toLowerCase() : '';
   console.log("Attribute!")
 
   return { data: [], chara: "" }
 };
 
-const CHARACTER_SEARCH_MAP: { [key: string]: charcterSearchFunction } = {
+const CHARACTER_SEARCH_MAP: { [key: string]: characterSearchFunction } = {
   'a': characterAttributeSearch,
   '-attribute': characterAttributeSearch,
   'default': async function (args: Array<string>) {
