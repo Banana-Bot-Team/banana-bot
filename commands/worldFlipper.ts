@@ -140,7 +140,8 @@ const DAYOFWEEK: { [key: string]: number } = {
 const rotation = {
   name: 'rotation',
   group,
-  args: true,
+  // should not force args
+  args: false,
   usage: '<day of week>',
   aliases: ['rot', 'rotations', 'r'],
   description: 'Shows the daily material dungeon schedule.',
