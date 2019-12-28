@@ -16,12 +16,41 @@ import {
 const group = path.parse(__filename).name;
 
 function getArtEmbed(unit: any) {
-  return new RichEmbed().setTitle(unit.EnName + ' ' + unit.JpName).setImage(unit.SpriteURL);
+  return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(unit.SpriteURL);
 }
 
 function getGifEmbed(unit: any) {
-  return new RichEmbed().setTitle(unit.EnName + ' ' + unit.JpName).setImage(unit.GifURL);
+  return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(unit.GifURL);
 }
+
+// function getInfoEmbed(unit: any) {
+//   const rarity = Array(parseInt(unit.Rarity, 10))
+//     .fill(':star:')
+//     .join('');
+
+//   return new RichEmbed()
+//     .setTitle(unit.EnName + ' ' + unit.JpName)
+//     .setDescription(
+//       '**Attribute: **' +
+//         unit.JpAttribute +
+//         ' ' +
+//         unit.EnAttribute +
+//         '\n**Leader Skill: **' +
+//         unit.EnLeaderBuff +
+//         '\n**Active Skill: **' +
+//         unit.EnSkillName +
+//         (unit.SkillCost ? ' **Cost: **' + unit.SkillCost : '') +
+//         '\n' +
+//         unit.EnSkillDesc +
+//         '\n**Rarity: **' +
+//         rarity
+//     )
+//     .addField('Ability 1', unit.EnAbility1, true)
+//     .addField('Ability 2', unit.EnAbility2, true)
+//     .addField('Ability 3', unit.EnAbility3, true)
+//     .setThumbnail(unit.SpriteURL)
+//     .setFooter(unit.Role ? unit.Weapon + ' / ' + unit.Role : unit.Weapon);
+// }
 
 function getInfoEmbed(unit: any) {
   const rarity = Array(parseInt(unit.Rarity, 10))
@@ -29,27 +58,28 @@ function getInfoEmbed(unit: any) {
     .join('');
 
   return new RichEmbed()
-    .setTitle(unit.EnName + ' ' + unit.JpName)
+    .setTitle(unit.CNName + ' ' + unit.JPName)
     .setDescription(
       '**Attribute: **' +
-        unit.JpAttribute +
+        unit.CNAttribute +
         ' ' +
-        unit.EnAttribute +
+        unit.ENAttribute +
         '\n**Leader Skill: **' +
-        unit.EnLeaderBuff +
+        unit.CNLeaderBuff +
         '\n**Active Skill: **' +
-        unit.EnSkillName +
+        unit.CNSkillName +
         (unit.SkillCost ? ' **Cost: **' + unit.SkillCost : '') +
         '\n' +
-        unit.EnSkillDesc +
+        unit.CNSkillDesc +
         '\n**Rarity: **' +
         rarity
     )
-    .addField('Ability 1', unit.EnAbility1, true)
-    .addField('Ability 2', unit.EnAbility2, true)
-    .addField('Ability 3', unit.EnAbility3, true)
+    .addField('Ability 1', unit.CNAbility1, true)
+    .addField('Ability 2', unit.CNAbility2, true)
+    .addField('Ability 3', unit.CNAbility3, true)
     .setThumbnail(unit.SpriteURL)
-    .setFooter(unit.Role ? unit.Weapon + ' / ' + unit.Role : unit.Weapon);
+    .setFooter(unit.CNRole);
+  // .setFooter(unit.CNRole ? unit.Weapon + ' / ' + unit.CNRole : unit.Weapon);
 }
 
 async function sendMessage(unit: any, message: Message) {
