@@ -45,10 +45,11 @@ const help = {
             return !c.hidden;
           });
       });
-
+    const logo = new Attachment('./assets/logo.png', 'logo.png');
     const embed = new RichEmbed()
       .setTitle(`${user.username} commands list`)
-      .setThumbnail(user.avatarURL)
+      .attachFile(logo)
+      .setThumbnail('attachment://logo.png')
       .setDescription('All commands can be abbreviated')
       .setTimestamp();
     Object.keys(orderedCommands).forEach(function(k) {
@@ -67,7 +68,6 @@ const help = {
     // not yet implemented
     // .addField('!bosses', 'Lists all bosses and their weapons', true)
     // .addField('!weapon [Weapon Name]', 'Lists information about the given weapon(Only has boss weapons atm).', true)
-
     return message.channel.send(embed);
   }
 };
