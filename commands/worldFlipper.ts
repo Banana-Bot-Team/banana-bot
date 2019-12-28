@@ -247,7 +247,8 @@ const character = {
 
       return data
         .map(function(char: any, index: string) {
-          return `${parseInt(index, 10) + 1}: ${char.CNName} ${char.CNRole}`;
+          return `${parseInt(index, 10) +
+            1}: (${char.CNAttribute}) ${char.CNName} ${char.JPName} [${char.Nicknames.split(' ')[0]}]`;
         })
         .join('\n');
     })();
