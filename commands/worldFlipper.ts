@@ -197,11 +197,12 @@ const tls = {
   name: 'translations',
   group,
   aliases: ['tl', 'translation'],
-  description: 'Links Translation Sheet.',
+  description: '中文翻譯',
   execute(message: Message) {
     const tlDocLink =
       'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5OvhecdUnTXEeO2fpdERfiZh3PzadSoGcpQ1IEhAPCSfcv2iLk7p0V7MFiZ7AZNnPVRSzUsRI5Wye/pubhtml#';
-    return message.channel.send(`The main translation document can be found here:\n${tlDocLink}`);
+    return message.channel.send(
+      new RichEmbed().setTitle('中文翻譯連結').setURL(tlDocLink));
   }
 };
 
@@ -211,17 +212,17 @@ const character = {
   args: true,
   usage: '<chara name>',
   aliases: ['c', 'char'],
-  description: 'Lists information about the given character.',
+  description: '查詢角色資訊',
   async execute(message: Message, args: Array<string>) {
     const chara = args.length ? args.join(' ').toLowerCase() : '';
     if (chara.length < 2) {
-      return message.channel.send('Search too short please have a minimum of 2 letters!');
+      return message.channel.send('請最少輸入2個字!');
     }
     const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
     const data = res.data;
 
     if (data.length === 0) {
-      return message.channel.send('No character found!');
+      return message.channel.send('找不到辣!');
     }
 
     const unit = (function() {

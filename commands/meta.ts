@@ -21,7 +21,7 @@ const help = {
   group,
   aliases: ['commands', 'h'],
   memberName: 'help',
-  description: 'Prints out this message.',
+  description: '查詢指令',
   execute(message: Message) {
     const user = message.client.user;
     const orderedCommands: any = {};
@@ -47,10 +47,10 @@ const help = {
       });
     const logo = new Attachment('./assets/logo.png', 'logo.png');
     const embed = new RichEmbed()
-      .setTitle(`${user.username} commands list`)
+      .setTitle(`${user.username} 指令列表`)
       .attachFile(logo)
       .setThumbnail('attachment://logo.png')
-      .setDescription('All commands can be abbreviated')
+      .setDescription('所有指令都能縮寫')
       .setTimestamp();
     Object.keys(orderedCommands).forEach(function(k) {
       if (orderedCommands[k].length > 0) {
@@ -92,7 +92,7 @@ const ping = {
   async execute(message: Message) {
     const msg = (await message.channel.send('Pong!')) as Message;
     const pingTime = moment(msg.createdTimestamp).diff(moment(message.createdTimestamp));
-    return msg.edit(`Pong! Time taken: ${pingTime}ms`);
+    return msg.edit(`Pong! 延遲: ${pingTime} 毫秒`);
   }
 };
 
