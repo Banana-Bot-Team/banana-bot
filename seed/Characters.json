@@ -29,7 +29,8 @@
       "Race": "人",
       "Race1": "人",
       "Gender": "女",
-      "Nicknames": "可憐 剣鬼 劍鬼"
+      "Nicknames": "可憐 剣鬼 劍鬼",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -59,7 +60,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -89,7 +91,8 @@
       "Race": "不死/精靈",
       "Race1": "不死",
       "Race2": "精靈",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -118,7 +121,8 @@
       "Rarity": "5",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -148,7 +152,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -178,7 +183,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -208,7 +214,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -238,7 +245,8 @@
       "Race": "人",
       "Race1": "人",
       "Gender": "男",
-      "Nicknames": "4郎 4娘 四娘 四郎"
+      "Nicknames": "4郎 4娘 四娘 四郎",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -268,7 +276,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -298,7 +307,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -328,7 +338,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -357,7 +368,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -387,7 +399,8 @@
       "Race": "植物/精靈",
       "Race1": "植物",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -416,7 +429,8 @@
       "Rarity": "3",
       "Race": "不死",
       "Race1": "不死",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -445,7 +459,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -475,7 +490,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -504,7 +520,8 @@
       "Rarity": "3",
       "Race": "魔",
       "Race1": "魔",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -533,7 +550,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -562,7 +580,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -591,7 +610,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -618,7 +638,8 @@
       "Rarity": "2",
       "Race": "獸",
       "Race1": "獸",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -645,7 +666,8 @@
       "Rarity": "2",
       "Race": "妖",
       "Race1": "妖",
-      "Gender": "不明"
+      "Gender": "不明",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -672,7 +694,8 @@
       "Rarity": "1",
       "Race": "精靈",
       "Race1": "精靈",
-      "Gender": "不明"
+      "Gender": "不明",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -701,7 +724,8 @@
       "Rarity": "5",
       "Race": "妖",
       "Race1": "妖",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -729,7 +753,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -759,7 +784,8 @@
       "Race": "人",
       "Race1": "人",
       "Gender": "男",
-      "Nicknames": "雷4郎 雷4娘 雷四郎 雷四娘"
+      "Nicknames": "雷4郎 雷4娘 雷四郎 雷四娘",
+      "Limited": "聖誕"
     },
     {
       "fullbody": [
@@ -788,7 +814,8 @@
       "Rarity": "4",
       "Race": "龍",
       "Race1": "龍",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -818,7 +845,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -848,7 +876,8 @@
       "Race": "人/機械",
       "Race1": "人",
       "Race2": "機械",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -878,7 +907,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -908,7 +938,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -938,7 +969,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -968,7 +1000,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": "聖誕"
     },
     {
       "fullbody": [
@@ -997,7 +1030,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1026,7 +1060,8 @@
       "Rarity": "3",
       "Race": "獸",
       "Race1": "獸",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1056,7 +1091,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1086,7 +1122,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1116,7 +1153,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1146,7 +1184,8 @@
       "Race": "人/妖",
       "Race1": "人",
       "Race2": "妖",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1175,7 +1214,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1205,7 +1245,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1234,7 +1275,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1261,7 +1303,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1288,7 +1331,8 @@
       "Rarity": "1",
       "Race": "精靈",
       "Race1": "精靈",
-      "Gender": "不明"
+      "Gender": "不明",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1315,7 +1359,8 @@
       "Rarity": "1",
       "Race": "獸",
       "Race1": "獸",
-      "Gender": "不明"
+      "Gender": "不明",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1344,7 +1389,8 @@
       "Rarity": "5",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1375,7 +1421,8 @@
       "Race1": "人",
       "Race2": "妖",
       "Gender": "男",
-      "Nicknames": "陰陽師 正太"
+      "Nicknames": "陰陽師 正太",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1404,7 +1451,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1433,7 +1481,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1463,7 +1512,8 @@
       "Race": "人/水棲",
       "Race1": "人",
       "Race2": "水棲",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1493,7 +1543,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1522,7 +1573,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1551,7 +1603,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1580,7 +1633,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1609,7 +1663,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1638,7 +1693,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1667,7 +1723,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1697,7 +1754,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1726,7 +1784,8 @@
       "Rarity": "3",
       "Race": "妖",
       "Race1": "妖",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1755,7 +1814,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1784,7 +1844,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1813,7 +1874,8 @@
       "Rarity": "3",
       "Race": "龍",
       "Race1": "龍",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1842,7 +1904,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1872,7 +1935,8 @@
       "Race": "植物/精靈",
       "Race1": "植物",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1899,7 +1963,8 @@
       "Rarity": "1",
       "Race": "精靈",
       "Race1": "精靈",
-      "Gender": "不明"
+      "Gender": "不明",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1928,7 +1993,8 @@
       "Rarity": "5",
       "Race": "龍",
       "Race1": "龍",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1957,7 +2023,8 @@
       "Rarity": "5",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -1987,7 +2054,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2016,7 +2084,8 @@
       "Rarity": "5",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": "聖誕"
     },
     {
       "fullbody": [
@@ -2045,7 +2114,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2074,7 +2144,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2103,7 +2174,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2132,7 +2204,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2162,7 +2235,8 @@
       "Race": "人/妖",
       "Race1": "人",
       "Race2": "妖",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2191,7 +2265,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2218,7 +2293,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2247,7 +2323,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2277,7 +2354,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2306,7 +2384,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2335,7 +2414,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2364,7 +2444,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2393,7 +2474,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2422,7 +2504,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2451,7 +2534,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2480,7 +2564,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2507,7 +2592,8 @@
       "Rarity": "2",
       "Race": "機械",
       "Race1": "機械",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2535,7 +2621,8 @@
       "Race": "植物/精靈",
       "Race1": "植物",
       "Race2": "精靈",
-      "Gender": "不明"
+      "Gender": "不明",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2562,7 +2649,8 @@
       "Rarity": "1",
       "Race": "精靈",
       "Race1": "精靈",
-      "Gender": "不明"
+      "Gender": "不明",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2589,7 +2677,8 @@
       "Rarity": "1",
       "Race": "精靈",
       "Race1": "精靈",
-      "Gender": "不明"
+      "Gender": "不明",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2619,7 +2708,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2648,7 +2738,8 @@
       "Rarity": "5",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2677,7 +2768,8 @@
       "Rarity": "4",
       "Race": "魔",
       "Race1": "魔",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2706,7 +2798,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2736,7 +2829,8 @@
       "Race": "人/不死",
       "Race1": "人",
       "Race2": "不死",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2766,7 +2860,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2795,7 +2890,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2824,7 +2920,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2853,7 +2950,8 @@
       "Rarity": "3",
       "Race": "魔",
       "Race1": "魔",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2882,7 +2980,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2911,7 +3010,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2940,7 +3040,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2970,7 +3071,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -2999,7 +3101,8 @@
       "Rarity": "5",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3028,7 +3131,8 @@
       "Rarity": "5",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3057,7 +3161,8 @@
       "Rarity": "5",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3086,7 +3191,8 @@
       "Rarity": "5",
       "Race": "妖",
       "Race1": "妖",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": "聖誕"
     },
     {
       "fullbody": [
@@ -3116,7 +3222,8 @@
       "Race": "人/機械",
       "Race1": "人",
       "Race2": "機械",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3145,7 +3252,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3175,7 +3283,8 @@
       "Race": "人/精靈",
       "Race1": "人",
       "Race2": "精靈",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3204,7 +3313,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3233,7 +3343,8 @@
       "Rarity": "4",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3262,7 +3373,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3291,7 +3403,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3320,7 +3433,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3350,7 +3464,8 @@
       "Race": "人/獸",
       "Race1": "人",
       "Race2": "獸",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3379,7 +3494,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3408,7 +3524,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "男"
+      "Gender": "男",
+      "Limited": ""
     },
     {
       "fullbody": [
@@ -3437,7 +3554,8 @@
       "Rarity": "3",
       "Race": "人",
       "Race1": "人",
-      "Gender": "女"
+      "Gender": "女",
+      "Limited": ""
     }
   ]
 }

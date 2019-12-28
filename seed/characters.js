@@ -25,7 +25,8 @@ function characters() {
         Rarity,
         Race1,
         Race2,
-        Gender
+        Gender,
+        Limited,
       } = character;
       const obj = {
         CNAttribute,
@@ -42,7 +43,8 @@ function characters() {
         Rarity,
         Race1,
         Race2,
-        Gender
+        Gender,
+        Limited
       };
       if (enIndex > 0) {
         const {
