@@ -255,7 +255,7 @@ const character = {
     })();
 
     if (typeof unit === 'string') {
-      const matches = (await message.channel.send('你可能在找：\n```' + unit + '```')) as Message;
+      const matches = (await message.channel.send('你可能在找：\n```' + unit + '```\n請回覆號碼')) as Message;
       const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, {
         max: 1,
         time: 15000
