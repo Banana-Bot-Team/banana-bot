@@ -220,8 +220,6 @@ const character = {
     const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
     const data = res.data;
 
-    console.log(data);
-
     if (data.length === 0) {
       return message.channel.send('No character found!');
     }
