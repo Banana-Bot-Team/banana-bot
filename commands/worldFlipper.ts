@@ -89,7 +89,17 @@ const rotation = {
   aliases: ['rot', 'rotations', 'r'],
   description: 'Shows the daily material dungeon schedule.',
   execute(message: Message) {
-    const attachment = new Attachment('./assets/charts/rotations.png', 'rotations.png');
+    const attachments = [
+      './assets/charts/rotations.png',
+      './assets/charts/light.png',
+      './assets/charts/fire.png',
+      './assets/charts/water.png',
+      './assets/charts/wind.png',
+      './assets/charts/thunder.png',
+      './assets/charts/dark.png'
+    ];
+    const dayOfWeek = new Date().getDay();
+    const attachment = new Attachment(attachments[dayOfWeek], 'rotations.png');
     return message.channel.send('', attachment);
   }
 };
@@ -130,6 +140,8 @@ const character = {
     }
     const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
     const data = res.data;
+
+    console.log(data);
 
     if (data.length === 0) {
       return message.channel.send('No character found!');
