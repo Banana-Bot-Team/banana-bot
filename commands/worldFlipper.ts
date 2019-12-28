@@ -113,12 +113,38 @@ async function sendMessage(unit: any, message: Message) {
   collector.on('end', () => msg.clearReactions());
 }
 
+const DAYOFWEEK: { [key: string]: number } = {
+  sun: 0,
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sunday: 0,
+  monday: 1,
+  tuesday: 2,
+  wednesday: 3,
+  thursday: 4,
+  friday: 5,
+  saturday: 6,
+  星期日: 0,
+  星期一: 1,
+  星期二: 2,
+  星期三: 3,
+  星期四: 4,
+  星期五: 5,
+  星期六: 6
+};
+
 const rotation = {
   name: 'rotation',
   group,
+  args: true,
+  usage: '<day of week>',
   aliases: ['rot', 'rotations', 'r'],
   description: 'Shows the daily material dungeon schedule.',
-  execute(message: Message) {
+  execute(message: Message, args: Array<string>) {
     const attachments = [
       './assets/charts/all.png',
       './assets/charts/light.png',
@@ -128,7 +154,17 @@ const rotation = {
       './assets/charts/thunder.png',
       './assets/charts/dark.png'
     ];
-    const dayOfWeek = new Date().getDay();
+    let dayOfWeek = new Date().getDay();
+    if (Array.isArray(args) && args.length > 0) {
+      // replace chinese mutation
+      let arg = String(args[0]).toLowerCase();
+      arg = arg
+        .replace('周末', '星期六')
+        .replace('禮拜', '星期')
+        .replace('拜', '星期')
+        .replace('週', '星期');
+      dayOfWeek = DAYOFWEEK[arg] ?? dayOfWeek;
+    }
     const attachment = new Attachment(attachments[dayOfWeek], 'all.png');
     return message.channel.send('', attachment);
   }
