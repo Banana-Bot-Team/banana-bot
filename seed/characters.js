@@ -26,6 +26,7 @@ function characters() {
         Race1,
         Race2,
         Gender,
+        skillBar: SkillCost,
         Limited,
       } = character;
       const obj = {
@@ -44,6 +45,7 @@ function characters() {
         Race1,
         Race2,
         Gender,
+        SkillCost,
         Limited
       };
       if (enIndex > 0) {
