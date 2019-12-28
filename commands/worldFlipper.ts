@@ -226,8 +226,6 @@ const character = {
     const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
     const data = res.data;
 
-    console.log(data);
-
     if (data.length === 0) {
       // Use includes
       if (chara.includes('banana') || chara.includes('拔娜娜')) return message.channel.send('請別輸入奇怪的東西!!');
@@ -255,7 +253,7 @@ const character = {
     })();
 
     if (typeof unit === 'string') {
-      const matches = (await message.channel.send('你可能在找：\n```' + unit + '```\n請回覆號碼')) as Message;
+      const matches = (await message.channel.send('你可能在找：(請回覆號碼)\n```' + unit + '```\n')) as Message;
       const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, {
         max: 1,
         time: 15000
