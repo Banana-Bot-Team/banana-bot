@@ -12,6 +12,7 @@ import {
   TextChannel
 } from 'discord.js';
 import * as moment from 'moment-timezone';
+import { type } from 'os';
 
 // Command Group Name
 const group = path.parse(__filename).name;
@@ -62,18 +63,18 @@ function getInfoEmbed(unit: any) {
     .setTitle(unit.CNName + ' ' + unit.JPName)
     .setDescription(
       '**屬性: **' +
-        unit.CNAttribute +
-        ' ' +
-        unit.ENAttribute +
-        '\n**隊長特性: **' +
-        unit.CNLeaderBuff +
-        '\n**技能: **' +
-        unit.CNSkillName +
-        (unit.SkillCost ? ' **Cost: **' + unit.SkillCost : '') +
-        '\n' +
-        unit.CNSkillDesc +
-        '\n**稀有度: **' +
-        rarity
+      unit.CNAttribute +
+      ' ' +
+      unit.ENAttribute +
+      '\n**隊長特性: **' +
+      unit.CNLeaderBuff +
+      '\n**技能: **' +
+      unit.CNSkillName +
+      (unit.SkillCost ? ' **Cost: **' + unit.SkillCost : '') +
+      '\n' +
+      unit.CNSkillDesc +
+      '\n**稀有度: **' +
+      rarity
     )
     .addField('能力 1', unit.CNAbility1, true)
     .addField('能力 2', unit.CNAbility2, true)
@@ -89,7 +90,7 @@ async function sendMessage(unit: any, message: Message) {
   const gifReaction = '🎥';
   const reactionExpiry = 30000;
 
-  const filter = function(reaction: MessageReaction, user: User) {
+  const filter = function (reaction: MessageReaction, user: User) {
     return [artReaction, infoReaction, gifReaction].includes(reaction.emoji.name) && user.id === message.author.id;
   };
 
@@ -200,6 +201,8 @@ const rotation = {
 //   }
 // };
 
+// ---- tls ----
+
 const tls = {
   name: 'translations',
   group,
@@ -212,7 +215,39 @@ const tls = {
   }
 };
 
+// ---- charater ----
+
+type charcterSearchFunction = (args: Array<string>) => Promise<any>;
+
 const INVALID_CHAR: Array<RegExp> = [/%/g, /_/g];
+
+async function characterAttributeSearch(args: Array<string>) {
+  let attribute = args.length ? args.join(' ').toLowerCase() : '';
+  console.log("Attribute!")
+};
+
+const CHARACTER_SEARCH_MAP: { [key: string]: charcterSearchFunction } = {
+  'a': characterAttributeSearch,
+  '-attribute': characterAttributeSearch,
+  'default': async function (args: Array<string>) {
+    let chara = args.length ? args.join(' ').toLowerCase() : '';
+
+    // Filter out invalid character
+    chara = INVALID_CHAR.reduce((chara: string, c: RegExp) => {
+      return chara.replace(c, '');
+    }, chara);
+
+    // Allow Emoji
+    if (chara.startsWith('<') && chara.endsWith('>')) {
+      const matches = Array.from(chara.match(/<:(.+?):.+?>/) ?? []);
+      chara = matches.length === 2 ? `:${matches[1]}:` : '';
+    }
+
+    const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
+
+    return { data: res.data, chara };
+  }
+};
 
 const character = {
   name: 'character',
@@ -222,23 +257,14 @@ const character = {
   aliases: ['c', 'char'],
   description: '查詢角色資訊',
   async execute(message: Message, args: Array<string>) {
-    let chara = args.length ? args.join(' ').toLowerCase() : '';
-    // if (chara.length < 2) {
-    //   return message.channel.send('請最少輸入2個字!');
-    // }
 
-    // Filter out invalid character
-    chara = INVALID_CHAR.reduce(function(chara: string, c: RegExp) {
-      return chara.replace(c, '');
-    }, chara);
+    const { func, newargs } = (function () {
+      return args.length && args[0].startsWith('-')
+        ? { func: CHARACTER_SEARCH_MAP[args[0].slice(1)], newargs: args.slice(1) }
+        : { func: CHARACTER_SEARCH_MAP.default, newargs: args };
+    })();
 
-    // Allow Emoji
-    if (chara.startsWith('<') && chara.endsWith('>')) {
-      const matches = Array.from(chara.match(/<:(.+?):.+?>/) ?? []);
-      chara = matches.length === 2 ? `:${matches[1]}:` : '';
-    }
-    const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
-    const data = res.data;
+    const { data, chara } = await func(newargs);
 
     if (data.length === 0) {
       // Use includes
@@ -246,12 +272,12 @@ const character = {
       return message.channel.send('找不到辣!');
     }
 
-    const unit = (function() {
+    const unit = (function () {
       if (data.length === 1) {
         return data;
       }
 
-      const nameExact = data.filter(function(char: any) {
+      const nameExact = data.filter(function (char: any) {
         return char.ENName.toLowerCase() === chara || char.CNName === chara || char.JPName === chara;
       });
 
@@ -260,7 +286,7 @@ const character = {
       }
 
       return data
-        .map(function(char: any, index: string) {
+        .map(function (char: any, index: string) {
           return `${parseInt(index, 10) +
             1}: (${char.CNAttribute}) ${char.CNName} ${char.JPName} [${char.Nicknames.split(' ')[0]}]`;
         })
@@ -273,7 +299,7 @@ const character = {
         max: 1,
         time: 15000
       });
-      collector.on('collect', function(m: any) {
+      collector.on('collect', function (m: any) {
         if (typeof data[m - 1] !== 'undefined') {
           sendMessage(data[m - 1], message);
           Promise.all([matches.delete(), m.delete()]);
