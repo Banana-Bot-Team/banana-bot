@@ -120,7 +120,7 @@ const rotation = {
   description: 'Shows the daily material dungeon schedule.',
   execute(message: Message) {
     const attachments = [
-      './assets/charts/rotations.png',
+      './assets/charts/all.png',
       './assets/charts/light.png',
       './assets/charts/fire.png',
       './assets/charts/water.png',
@@ -129,7 +129,7 @@ const rotation = {
       './assets/charts/dark.png'
     ];
     const dayOfWeek = new Date().getDay();
-    const attachment = new Attachment(attachments[dayOfWeek], 'rotations.png');
+    const attachment = new Attachment(attachments[dayOfWeek], 'all.png');
     return message.channel.send('', attachment);
   }
 };
