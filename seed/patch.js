@@ -5,7 +5,6 @@ const characters = require('./characters')
 
 async function patch() {
  characters.forEach(async function(character, index) {
-    // if(character.JPName === "カリオストロ") console.log(character)
     try {
       const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURIComponent(character.JPName)}`)
       console.log(character.JPName)
