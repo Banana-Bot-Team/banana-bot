@@ -61,7 +61,7 @@ const help = {
           if (c.aliases) {
             commandName = `${commandName}, ` + c.aliases.map((a: any) => `${prefix}${a}`).join(', ');
           }
-          embed.addField(commandName, c.description, true);
+          if (!c.hidden) embed.addField(commandName, c.description, true);
         });
       }
     });
@@ -77,6 +77,7 @@ const say = {
   group,
   args: true,
   usage: '<anything>',
+  hidden: true,
   description: 'Say something on behalf of banana.',
   execute(message: Message, args: Array<string>) {
     message.delete();
