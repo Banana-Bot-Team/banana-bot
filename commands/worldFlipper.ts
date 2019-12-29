@@ -17,6 +17,7 @@ import { type } from 'os';
 // Command Group Name
 const group = path.parse(__filename).name;
 
+const prefix = process.env.PREFIX ?? '!!';
 // function getInfoEmbed(unit: any) {
 //   const rarity = Array(parseInt(unit.Rarity, 10))
 //     .fill(':star:')
@@ -78,7 +79,7 @@ const rotation = {
   // should not force args
   args: false,
   usage: '<Day of week>',
-  aliases: ['rot', 'rotations', 'r'],
+  aliases: ['r'],
   description: '查詢素材關',
   execute(message: Message, args: Array<string>) {
     const attachments = [
@@ -137,9 +138,9 @@ const rotation = {
 // ---- tls ----
 
 const tls = {
-  name: 'translations',
+  name: 'translation',
   group,
-  aliases: ['tl', 'translation'],
+  aliases: ['tl'],
   description: '中文翻譯',
   execute(message: Message) {
     const tlDocLink =
@@ -155,9 +156,9 @@ const character = {
   name: 'character',
   group,
   args: true,
-  usage: '<角色名稱>',
-  aliases: ['c', 'char'],
-  description: '查詢角色資訊',
+  usage: '[-a] <名稱>',
+  aliases: ['c'],
+  description: `查詢角色資訊\n**e.g.**\n${prefix}c <名稱>\n${prefix}c -a <屬性>`,
   async execute(message: Message, args: Array<string>) {
     const { func, newargs } = getCharacterSearchFunc(args);
 
