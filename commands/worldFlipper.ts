@@ -17,13 +17,6 @@ import { type } from 'os';
 // Command Group Name
 const group = path.parse(__filename).name;
 
-function getArtEmbed(unit: any) {
-  return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(unit.SpriteURL);
-}
-
-function getGifEmbed(unit: any) {
-  return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(unit.GifURL);
-}
 
 // function getInfoEmbed(unit: any) {
 //   const rarity = Array(parseInt(unit.Rarity, 10))
@@ -54,66 +47,7 @@ function getGifEmbed(unit: any) {
 //     .setFooter(unit.Role ? unit.Weapon + ' / ' + unit.Role : unit.Weapon);
 // }
 
-function getInfoEmbed(unit: any) {
-  const rarity = Array(parseInt(unit.Rarity, 10))
-    .fill(':star:')
-    .join('');
-
-  return new RichEmbed()
-    .setTitle(unit.CNName + ' ' + unit.JPName)
-    .setDescription(
-      '**屬性: **' +
-      unit.CNAttribute +
-      ' ' +
-      unit.ENAttribute +
-      '\n**隊長特性: **' +
-      unit.CNLeaderBuff +
-      '\n**技能: **' +
-      unit.CNSkillName +
-      (unit.SkillCost ? ' **Cost: **' + unit.SkillCost : '') +
-      '\n' +
-      unit.CNSkillDesc +
-      '\n**稀有度: **' +
-      rarity
-    )
-    .addField('能力 1', unit.CNAbility1, true)
-    .addField('能力 2', unit.CNAbility2, true)
-    .addField('能力 3', unit.CNAbility3, true)
-    .setThumbnail(unit.SpriteURL)
-    .setFooter(unit.CNRole);
-  // .setFooter(unit.CNRole ? unit.Weapon + ' / ' + unit.CNRole : unit.Weapon);
-}
-
-async function sendMessage(unit: any, message: Message) {
-  const artReaction = '🎨';
-  const infoReaction = 'ℹ️';
-  const gifReaction = '🎥';
-  const reactionExpiry = 30000;
-
-  const filter = function (reaction: MessageReaction, user: User) {
-    return [artReaction, infoReaction, gifReaction].includes(reaction.emoji.name) && user.id === message.author.id;
-  };
-
-  const msg = (await (message.channel as TextChannel).send(getInfoEmbed(unit))) as Message;
-  await msg.react(artReaction);
-  await msg.react(infoReaction);
-  await msg.react(gifReaction);
-
-  const collector = msg.createReactionCollector(filter, { max: 10, time: reactionExpiry });
-  collector.on('collect', r => {
-    if (r.emoji.name === artReaction) {
-      msg.edit(getArtEmbed(unit));
-    }
-    if (r.emoji.name === infoReaction) {
-      msg.edit(getInfoEmbed(unit));
-    }
-    if (r.emoji.name === gifReaction) {
-      msg.edit(getGifEmbed(unit));
-    }
-  });
-
-  collector.on('end', () => msg.clearReactions());
-}
+// ---- rotation ----
 
 const DAYOFWEEK: { [key: string]: number } = {
   sun: 0,
@@ -215,41 +149,8 @@ const tls = {
   }
 };
 
-// ---- charater ----
-type characterSearchFunction = (args: Array<string>) => Promise<characterSearchResult>;
-type characterSearchResult = { data: any, chara: string };
-
-const INVALID_CHAR: Array<RegExp> = [/%/g, /_/g];
-
-const characterAttributeSearch: characterSearchFunction = async (args: Array<string>) => {
-  let attribute = args.length ? args.join(' ').toLowerCase() : '';
-  console.log("Attribute!")
-
-  return { data: [], chara: "" }
-};
-
-const CHARACTER_SEARCH_MAP: { [key: string]: characterSearchFunction } = {
-  'a': characterAttributeSearch,
-  '-attribute': characterAttributeSearch,
-  'default': async function (args: Array<string>) {
-    let chara = args.length ? args.join(' ').toLowerCase() : '';
-
-    // Filter out invalid character
-    chara = INVALID_CHAR.reduce((chara: string, c: RegExp) => {
-      return chara.replace(c, '');
-    }, chara);
-
-    // Allow Emoji
-    if (chara.startsWith('<') && chara.endsWith('>')) {
-      const matches = Array.from(chara.match(/<:(.+?):.+?>/) ?? []);
-      chara = matches.length === 2 ? `:${matches[1]}:` : '';
-    }
-
-    const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
-
-    return { data: res.data, chara };
-  }
-};
+// ---- character ----
+import { getCharacterSearchFunc, sendCharacterMessage } from '../source/character';
 
 const character = {
   name: 'character',
@@ -260,17 +161,13 @@ const character = {
   description: '查詢角色資訊',
   async execute(message: Message, args: Array<string>) {
 
-    const { func, newargs } = (function () {
-      return args.length && args[0].startsWith('-')
-        ? { func: CHARACTER_SEARCH_MAP[args[0].slice(1)], newargs: args.slice(1) }
-        : { func: CHARACTER_SEARCH_MAP.default, newargs: args };
-    })();
+    const { func, newargs } = getCharacterSearchFunc(args);
 
-    const { data, chara } = await func(newargs);
+    const { data, input } = await func(newargs);
 
     if (data.length === 0) {
       // Use includes
-      if (chara.includes('banana') || chara.includes('拔娜娜')) return message.channel.send('請別輸入奇怪的東西!!');
+      if (input.includes('banana') || input.includes('拔娜娜')) return message.channel.send('請別輸入奇怪的東西!!');
       return message.channel.send('找不到辣!');
     }
 
@@ -280,7 +177,7 @@ const character = {
       }
 
       const nameExact = data.filter(function (char: any) {
-        return char.ENName.toLowerCase() === chara || char.CNName === chara || char.JPName === chara;
+        return char.ENName.toLowerCase() === input || char.CNName === input || char.JPName === input;
       });
 
       if (nameExact.length > 0) {
@@ -303,14 +200,28 @@ const character = {
       });
       collector.on('collect', function (m: any) {
         if (typeof data[m - 1] !== 'undefined') {
-          sendMessage(data[m - 1], message);
+          sendCharacterMessage(data[m - 1], message);
           Promise.all([matches.delete(), m.delete()]);
         }
       });
     } else {
-      sendMessage(unit[0], message);
+      sendCharacterMessage(unit[0], message);
     }
   }
 };
+
+// ---- weapon ----
+const weapon = {
+  name: 'weapon',
+  group,
+  args: true,
+  usage: '<武器名稱>',
+  aliases: ['w', 'weapon'],
+  description: '查詢武器資訊',
+  async execute(message: Message, args: Array<string>) {
+
+  }
+}
+
 
 export default [rotation, tls, character];
