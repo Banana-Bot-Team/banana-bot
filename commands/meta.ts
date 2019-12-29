@@ -19,7 +19,7 @@ const group = path.parse(__filename).name;
 const help = {
   name: 'help',
   group,
-  aliases: ['commands', 'h'],
+  aliases: ['h'],
   memberName: 'help',
   description: '查詢指令',
   execute(message: Message) {

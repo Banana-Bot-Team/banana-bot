@@ -141,11 +141,17 @@ const tls = {
   name: 'translation',
   group,
   aliases: ['tl'],
-  description: '中文翻譯',
-  execute(message: Message) {
-    const tlDocLink =
+  description: '中文翻譯連結',
+  async execute(message: Message) {
+    const tlCharDoc =
       'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5OvhecdUnTXEeO2fpdERfiZh3PzadSoGcpQ1IEhAPCSfcv2iLk7p0V7MFiZ7AZNnPVRSzUsRI5Wye/pubhtml#';
-    return message.channel.send(new RichEmbed().setTitle('中文翻譯連結').setURL(tlDocLink));
+
+    const tlWeaponDoc = 'https://bbs.nga.cn/read.php?tid=19615906&rand=876';
+    const msg = (await message.channel.send(
+      new RichEmbed().setTitle('角色中文翻譯').setURL(tlCharDoc))) as Message;
+
+    return msg.channel.send(new RichEmbed().setTitle('武器中文翻譯').setURL(tlWeaponDoc));
+
   }
 };
 
@@ -172,12 +178,12 @@ const character = {
       return message.channel.send('找不到辣!');
     }
 
-    const unit = (function() {
+    const unit = (function () {
       if (data.length === 1) {
         return data;
       }
 
-      const nameExact = data.filter(function(char: any) {
+      const nameExact = data.filter(function (char: any) {
         return char.ENName.toLowerCase() === input || char.CNName === input || char.JPName === input;
       });
 
@@ -186,7 +192,7 @@ const character = {
       }
 
       return data
-        .map(function(char: any, index: string) {
+        .map(function (char: any, index: string) {
           return `${parseInt(index, 10) +
             1}: (${char.CNAttribute}) ${char.CNName} ${char.JPName} [${(char.Nicknames && char.Nicknames.split(' ')[0]) ?? '沒有'}]`;
         })
@@ -199,7 +205,7 @@ const character = {
         max: 1,
         time: 15000
       });
-      collector.on('collect', function(m: any) {
+      collector.on('collect', function (m: any) {
         if (typeof data[m - 1] !== 'undefined') {
           sendCharacterMessage(data[m - 1], message);
           Promise.all([matches.delete(), m.delete()]);
@@ -221,7 +227,7 @@ const weapon = {
   usage: '<武器名稱>',
   aliases: ['w', 'weapon'],
   description: '查詢武器資訊',
-  async execute(message: Message, args: Array<string>) {}
+  async execute(message: Message, args: Array<string>) { }
 };
 
 export default [rotation, tls, character];
