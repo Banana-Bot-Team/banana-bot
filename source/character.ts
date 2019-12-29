@@ -90,7 +90,7 @@ const INVALID_CHAR: Array<RegExp> = [/%/g, /_/g];
 function mergeInput(args: Array<string>): string {
   let str = args.length ? args.join(' ').toLowerCase() : '';
 
-  INVALID_CHAR.reduce((str: string, c: RegExp) => {
+  str = INVALID_CHAR.reduce((str: string, c: RegExp) => {
     return str.replace(c, '');
   }, str);
 
