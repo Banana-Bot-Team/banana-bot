@@ -104,7 +104,9 @@ function mergeInput(args: Array<string>): string {
 }
 
 const characterAttributeSearch: types.searchFunction = async (args: Array<string>) => {
-  const attribute = mergeInput(args);
+  let attribute = mergeInput(args);
+
+  attribute = attribute.replace('暗', '闇');
 
   const res = await axios.get(`${process.env.API_URL}/attribute?name=${encodeURI(attribute)}`)
 
