@@ -17,7 +17,6 @@ import { type } from 'os';
 // Command Group Name
 const group = path.parse(__filename).name;
 
-
 // function getInfoEmbed(unit: any) {
 //   const rarity = Array(parseInt(unit.Rarity, 10))
 //     .fill(':star:')
@@ -160,7 +159,6 @@ const character = {
   aliases: ['c', 'char'],
   description: '查詢角色資訊',
   async execute(message: Message, args: Array<string>) {
-
     const { func, newargs } = getCharacterSearchFunc(args);
 
     const { data, input } = await func(newargs);
@@ -171,12 +169,12 @@ const character = {
       return message.channel.send('找不到辣!');
     }
 
-    const unit = (function () {
+    const unit = (function() {
       if (data.length === 1) {
         return data;
       }
 
-      const nameExact = data.filter(function (char: any) {
+      const nameExact = data.filter(function(char: any) {
         return char.ENName.toLowerCase() === input || char.CNName === input || char.JPName === input;
       });
 
@@ -185,9 +183,9 @@ const character = {
       }
 
       return data
-        .map(function (char: any, index: string) {
+        .map(function(char: any, index: string) {
           return `${parseInt(index, 10) +
-            1}: (${char.CNAttribute}) ${char.CNName} ${char.JPName} [${char.Nicknames.split(' ')[0]}]`;
+            1}: (${char.CNAttribute}) ${char.CNName} ${char.JPName} [${(char.Nicknames && char.Nicknames.split(' ')[0]) ?? '沒有'}]`;
         })
         .join('\n');
     })();
@@ -198,7 +196,7 @@ const character = {
         max: 1,
         time: 15000
       });
-      collector.on('collect', function (m: any) {
+      collector.on('collect', function(m: any) {
         if (typeof data[m - 1] !== 'undefined') {
           sendCharacterMessage(data[m - 1], message);
           Promise.all([matches.delete(), m.delete()]);
@@ -218,10 +216,7 @@ const weapon = {
   usage: '<武器名稱>',
   aliases: ['w', 'weapon'],
   description: '查詢武器資訊',
-  async execute(message: Message, args: Array<string>) {
-
-  }
-}
-
+  async execute(message: Message, args: Array<string>) {}
+};
 
 export default [rotation, tls, character];
