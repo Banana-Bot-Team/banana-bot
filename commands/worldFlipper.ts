@@ -161,7 +161,9 @@ const character = {
   async execute(message: Message, args: Array<string>) {
     const { func, newargs } = getCharacterSearchFunc(args);
 
+
     const { data, input } = await func(newargs);
+
 
     if (data.length === 0) {
       // Use includes
@@ -205,7 +207,9 @@ const character = {
     } else {
       sendCharacterMessage(unit[0], message);
     }
+
   }
+
 };
 
 // ---- weapon ----

@@ -104,17 +104,18 @@ function mergeInput(args: Array<string>): string {
 }
 
 const characterAttributeSearch: types.searchFunction = async (args: Array<string>) => {
-  let attribute = mergeInput(args);
-  console.log(`Attribute: ${attribute}`);
+  const attribute = mergeInput(args);
 
-  return { data: [], input: attribute };
+  const res = await axios.get(`${process.env.API_URL}/attribute?name=${encodeURI(attribute)}`)
+
+  return { data: res.data, input: attribute };
 };
 
 const CHARACTER_SEARCH_MAP: { [key: string]: types.searchFunction } = {
   'a': characterAttributeSearch,
   '-attribute': characterAttributeSearch,
   'default': async function (args: Array<string>) {
-    let chara = mergeInput(args);
+    const chara = mergeInput(args);
 
     const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
 
