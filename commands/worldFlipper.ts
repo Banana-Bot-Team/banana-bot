@@ -147,11 +147,15 @@ const tls = {
       'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5OvhecdUnTXEeO2fpdERfiZh3PzadSoGcpQ1IEhAPCSfcv2iLk7p0V7MFiZ7AZNnPVRSzUsRI5Wye/pubhtml#';
 
     const tlWeaponDoc = 'https://bbs.nga.cn/read.php?tid=19615906&rand=876';
-    const msg = (await message.channel.send(
-      new RichEmbed().setTitle('角色中文翻譯').setURL(tlCharDoc))) as Message;
+    const msg = (await message.channel.send(new RichEmbed()
+      .setTitle('角色中文翻譯')
+      .setColor(10181046) // purple
+      .setURL(tlCharDoc))) as Message;
 
-    return msg.channel.send(new RichEmbed().setTitle('武器中文翻譯').setURL(tlWeaponDoc));
-
+    return msg.channel.send(new RichEmbed()
+      .setTitle('武器中文翻譯')
+      .setColor(3447003) // blue
+      .setURL(tlWeaponDoc));
   }
 };
 
