@@ -1,4 +1,5 @@
 import * as path from 'path';
+import * as types from './types';
 import axios from 'axios';
 import {
   Attachment,
@@ -83,34 +84,37 @@ async function sendCharacterMessage(unit: any, message: Message) {
   collector.on('end', () => msg.clearReactions());
 }
 
-type searchResult = { data: any, input: string };
-type searchFunction = (args: Array<string>) => Promise<searchResult>;
 
 const INVALID_CHAR: Array<RegExp> = [/%/g, /_/g];
 
-const characterAttributeSearch: searchFunction = async (args: Array<string>) => {
-  let attribute = args.length ? args.join(' ').toLowerCase() : '';
+function mergeInput(args: Array<string>): string {
+  let str = args.length ? args.join(' ').toLowerCase() : '';
+
+  INVALID_CHAR.reduce((str: string, c: RegExp) => {
+    return str.replace(c, '');
+  }, str);
+
+  // Allow Emoji
+  if (str.startsWith('<') && str.endsWith('>')) {
+    const matches = Array.from(str.match(/<:(.+?):.+?>/) ?? []);
+    str = matches.length === 2 ? `:${matches[1]}:` : '';
+  }
+
+  return str;
+}
+
+const characterAttributeSearch: types.searchFunction = async (args: Array<string>) => {
+  let attribute = mergeInput(args);
   console.log(`Attribute: ${attribute}`);
 
-  return { data: [], input: "" };
+  return { data: [], input: attribute };
 };
 
-const CHARACTER_SEARCH_MAP: { [key: string]: searchFunction } = {
+const CHARACTER_SEARCH_MAP: { [key: string]: types.searchFunction } = {
   'a': characterAttributeSearch,
   '-attribute': characterAttributeSearch,
   'default': async function (args: Array<string>) {
-    let chara = args.length ? args.join(' ').toLowerCase() : '';
-
-    // Filter out invalid character
-    chara = INVALID_CHAR.reduce((chara: string, c: RegExp) => {
-      return chara.replace(c, '');
-    }, chara);
-
-    // Allow Emoji
-    if (chara.startsWith('<') && chara.endsWith('>')) {
-      const matches = Array.from(chara.match(/<:(.+?):.+?>/) ?? []);
-      chara = matches.length === 2 ? `:${matches[1]}:` : '';
-    }
+    let chara = mergeInput(args);
 
     const res = await axios.get(`${process.env.API_URL}/lookup?name=${encodeURI(chara)}`);
 
