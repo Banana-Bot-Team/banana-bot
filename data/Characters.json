@@ -654,8 +654,8 @@
     "Ability2": "When HP is 50% or below , +50% attack power",
     "Ability3": "[Main] When HP is 50% or below, Multi-ball attack +80% and self attack +60%",
     "Rarity": "4",
-    "ImageURL": "https://worldbot.s3.us-east-2.amazonaws.com/char/alm / arum.png",
-    "GifURL": "https://worldbot.s3.us-east-2.amazonaws.com/gif/alm / arum.gif"
+    "ImageURL": "https://worldbot.s3.us-east-2.amazonaws.com/char/arum.png",
+    "GifURL": "https://worldbot.s3.us-east-2.amazonaws.com/gif/arum.gif"
   },
   {
     "Attribute": "闇 dark",
@@ -1088,8 +1088,8 @@
     "Ability2": "Everytime you activate a skill, leader attack power +10% [MAX 40%]",
     "Ability3": "[MAIN] Start the battle with 100% skill gauge and leader attack +10%",
     "Rarity": "3",
-    "ImageURL": "https://worldbot.s3.us-east-2.amazonaws.com/char/sha susu.png",
-    "GifURL": "https://worldbot.s3.us-east-2.amazonaws.com/gif/sha susu.gif"
+    "ImageURL": "https://worldbot.s3.us-east-2.amazonaws.com/char/shasusu.png",
+    "GifURL": "https://worldbot.s3.us-east-2.amazonaws.com/gif/shasusu.gif"
   },
   {
     "Attribute": "風 wind",
@@ -1130,8 +1130,8 @@
     "Ability2": "Increase whole party's floating effect time by +12% / Self is immune to paralyze",
     "Ability3": "(MAIN) When a party character is revived, that character recovers 8% of max HP",
     "Rarity": "3",
-    "ImageURL": "https://worldbot.s3.us-east-2.amazonaws.com/char/lichtar (leecher xd).png",
-    "GifURL": "https://worldbot.s3.us-east-2.amazonaws.com/gif/lichtar (leecher xd).gif"
+    "ImageURL": "https://worldbot.s3.us-east-2.amazonaws.com/char/lichtar.png",
+    "GifURL": "https://worldbot.s3.us-east-2.amazonaws.com/gif/lichtar.gif"
   },
   {
     "Attribute": "風 wind",
@@ -1172,8 +1172,8 @@
     "Ability2": "At 100 combos, increase own attack by +90 for one time only",
     "Ability3": "(MAIN) During Fever mode, increase own attack by +120%",
     "Rarity": "3",
-    "ImageURL": "https://worldbot.s3.us-east-2.amazonaws.com/char/false / force.png",
-    "GifURL": "https://worldbot.s3.us-east-2.amazonaws.com/gif/false / force.gif"
+    "ImageURL": "https://worldbot.s3.us-east-2.amazonaws.com/char/false.png",
+    "GifURL": "https://worldbot.s3.us-east-2.amazonaws.com/gif/false.gif"
   },
   {
     "Attribute": "風 wind",
