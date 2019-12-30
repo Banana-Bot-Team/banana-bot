@@ -135,6 +135,22 @@ const rotation = {
 //   }
 // };
 
+const income = {
+  name: 'income',
+  group,
+  aliases: ['i'],
+  description: '查看WF營收',
+  async execute(message: Message) {
+    const income = new Attachment('./cron/income.png', 'income.png');
+    return message.channel.send(new RichEmbed()
+      .setTitle("World Flipper 當月營收")
+      .setColor(3447003)
+      .attachFile(income)
+      .setImage('attachment://income.png')
+      .setTimestamp());
+  }
+}
+
 // ---- tls ----
 
 const tls = {
@@ -234,4 +250,4 @@ const weapon = {
   async execute(message: Message, args: Array<string>) { }
 };
 
-export default [rotation, tls, character];
+export default [rotation, tls, character, income];
