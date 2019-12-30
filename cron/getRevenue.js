@@ -14,5 +14,13 @@ const URL = "http://game-i.daa.jp/?%E3%82%A2%E3%83%97%E3%83%AA%2F%E3%83%AF%E3%83
   if (!!svg)
     await svg.screenshot({ path: path.join(__dirname, 'revenue.png') });
 
+
+  const table = await page.$$('.style_table');
+  const rank = await table[1].$('tbody');
+
+  if (!!rank)
+    await rank.screenshot({ path: path.join(__dirname, 'revenue_rank.png') });
+
+
   await browser.close();
 })();

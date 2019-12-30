@@ -142,10 +142,12 @@ const revenue = {
   description: '查看WF營收',
   async execute(message: Message) {
     const revenue = new Attachment('./cron/revenue.png', 'revenue.png');
+    const rank = new Attachment('./cron/revenue.png', 'revenue_rank.png');
     return message.channel.send(new RichEmbed()
       .setTitle("World Flipper 當月營收")
       .setColor(3447003)
-      .attachFile(revenue)
+      .attachFiles([revenue, rank])
+      .setThumbnail('attachment://revenue_rank.png')
       .setImage('attachment://revenue.png')
       .setTimestamp());
   }
