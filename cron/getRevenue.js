@@ -12,7 +12,7 @@ const URL = "http://game-i.daa.jp/?%E3%82%A2%E3%83%97%E3%83%AA%2F%E3%83%AF%E3%83
   const svg = await page.$('svg');
 
   if (!!svg)
-    await svg.screenshot({ path: path.join(__dirname, 'income.png') });
+    await svg.screenshot({ path: path.join(__dirname, 'revenue.png') });
 
   await browser.close();
 })();
