@@ -12,6 +12,9 @@ const prefix = process.env.PREFIX ?? '!!';
 const newyear = {
   name: 'newyear',
   group,
+  // should not force args
+  args: false,
+  usage: '<Day of Month>',
   aliases: ['ny'],
   description: '查詢新年強化素材關',
   execute(message: Message, args: Array<string>) {
