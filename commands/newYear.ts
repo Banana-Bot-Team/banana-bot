@@ -68,7 +68,7 @@ const newyear = {
         day = Number(args[0]) > 23 ? day : Number(args[0]);
       }
     }
-    const attachment = new Attachment(attachments[monentD], 'newyear.png');
+    const attachment = new Attachment(attachments[day], 'newyear.png');
     return message.channel.send('', attachment);
   }
 };
