@@ -2,6 +2,7 @@ import * as path from 'path';
 
 import { Attachment, Message } from 'discord.js';
 import * as moment from 'moment-timezone';
+import { isNumber } from 'util';
 
 // Command Group Name
 const group = path.parse(__filename).name;
@@ -21,19 +22,19 @@ const newyear = {
       './assets/charts/fire.png',
       './assets/charts/dark.png',
       './assets/charts/wind.png',
-      './assets/charts/thunder.png',
+      './assets/newyear/thunder.png',
       './assets/charts/light.png',
       './assets/charts/water.png',
       './assets/charts/fire.png',
       './assets/charts/dark.png', // 10
       './assets/charts/wind.png',
-      './assets/charts/thunder.png',
+      './assets/newyear/thunder.png',
       './assets/charts/light.png',
       './assets/charts/water.png',
       './assets/charts/fire.png',
       './assets/charts/dark.png',
       './assets/charts/wind.png',
-      './assets/charts/thunder.png',
+      './assets/newyear/thunder.png',
       './assets/charts/light.png',
       './assets/charts/water.png', // 20
       './assets/charts/fire.png',
@@ -41,12 +42,32 @@ const newyear = {
       './assets/charts/dark.png'
     ];
     moment.tz.setDefault('GMT');
-    let monentD = Number(
+    // Current
+    const monentD = Number(
       moment()
         .add(4, 'h')
         .format('DD')
     );
-    if (monentD > 23) monentD = 0;
+    // Fallback
+    let day = monentD > 23 ? 0 : monentD;
+    // Input
+    if (Array.isArray(args) && args.length > 0) {
+      if (isNaN(Number(args[0]))) {
+        switch (args[0]) {
+          case 'tomorrow':
+          case 'tmr':
+          case 't':
+          case 'next':
+          case 'n':
+            day = day + 1;
+            break;
+          default:
+            break;
+        }
+      } else {
+        day = Number(args[0]) > 23 ? day : Number(args[0]);
+      }
+    }
     const attachment = new Attachment(attachments[monentD], 'newyear.png');
     return message.channel.send('', attachment);
   }
