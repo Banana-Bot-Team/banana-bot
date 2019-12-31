@@ -78,7 +78,12 @@ const rotation = {
         .replace('週', '星期');
       dayOfWeek = DAYOFWEEK[arg] ?? dayOfWeek;
     }
-    const attachment = new Attachment(attachments[dayOfWeek], 'all.png');
+    let attachment;
+    try {
+      attachment = new Attachment(attachments[dayOfWeek], 'all.png');
+    } catch (err) {
+      attachment = new Attachment(attachments[DAYOFWEEK[monentW]], 'all.png');
+    }
     return message.channel.send('', attachment);
   }
 };
