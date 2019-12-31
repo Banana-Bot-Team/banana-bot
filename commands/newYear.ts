@@ -22,25 +22,25 @@ const newyear = {
       './assets/charts/dark.png', // 31 = 0
       './assets/charts/dark.png', // 1
       './assets/charts/water.png',
-      './assets/newyear/fire.png',
+      './assets/charts/fire.png',
       './assets/charts/dark.png',
       './assets/charts/wind.png',
-      './assets/newyear/thunder.png',
+      './assets/charts/thunder.png',
       './assets/charts/light.png',
       './assets/charts/water.png',
-      './assets/newyear/fire.png',
+      './assets/charts/fire.png',
       './assets/charts/dark.png', // 10
       './assets/charts/wind.png',
-      './assets/newyear/thunder.png',
+      './assets/charts/thunder.png',
       './assets/charts/light.png',
       './assets/charts/water.png',
-      './assets/newyear/fire.png',
+      './assets/charts/fire.png',
       './assets/charts/dark.png',
       './assets/charts/wind.png',
-      './assets/newyear/thunder.png',
+      './assets/charts/thunder.png',
       './assets/charts/light.png',
       './assets/charts/water.png', // 20
-      './assets/newyear/fire.png',
+      './assets/charts/fire.png',
       './assets/charts/dark.png',
       './assets/charts/dark.png'
     ];
