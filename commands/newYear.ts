@@ -72,7 +72,11 @@ const newyear = {
       }
     }
     const attachment = new Attachment(attachments[day], 'newyear.png');
-    return message.channel.send('', attachment);
+    try {
+      return message.channel.send('', attachment);
+    }catch(err) {
+      return message.channel.send('', new Attachment(attachments[monentD], 'newyear.png'))
+    }
   }
 };
 
