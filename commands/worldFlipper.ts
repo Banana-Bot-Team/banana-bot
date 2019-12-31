@@ -1,5 +1,4 @@
 import * as path from 'path';
-import axios from 'axios';
 import {
   Attachment,
   RichEmbed,
@@ -12,40 +11,11 @@ import {
   TextChannel
 } from 'discord.js';
 import * as moment from 'moment-timezone';
-import { type } from 'os';
 
 // Command Group Name
 const group = path.parse(__filename).name;
 
 const prefix = process.env.PREFIX ?? '!!';
-// function getInfoEmbed(unit: any) {
-//   const rarity = Array(parseInt(unit.Rarity, 10))
-//     .fill(':star:')
-//     .join('');
-
-//   return new RichEmbed()
-//     .setTitle(unit.EnName + ' ' + unit.JpName)
-//     .setDescription(
-//       '**Attribute: **' +
-//         unit.JpAttribute +
-//         ' ' +
-//         unit.EnAttribute +
-//         '\n**Leader Skill: **' +
-//         unit.EnLeaderBuff +
-//         '\n**Active Skill: **' +
-//         unit.EnSkillName +
-//         (unit.SkillCost ? ' **Cost: **' + unit.SkillCost : '') +
-//         '\n' +
-//         unit.EnSkillDesc +
-//         '\n**Rarity: **' +
-//         rarity
-//     )
-//     .addField('Ability 1', unit.EnAbility1, true)
-//     .addField('Ability 2', unit.EnAbility2, true)
-//     .addField('Ability 3', unit.EnAbility3, true)
-//     .setThumbnail(unit.SpriteURL)
-//     .setFooter(unit.Role ? unit.Weapon + ' / ' + unit.Role : unit.Weapon);
-// }
 
 // ---- rotation ----
 
@@ -113,28 +83,6 @@ const rotation = {
   }
 };
 
-// const guide = {
-//   name: 'guide',
-//   group,
-//   aliases: ['g', 'beginner'],
-//   description: "Links LilyCat's Beginner Progression Guide.",
-//   execute(message: Message) {
-//     const guideLink = 'https://docs.google.com/document/d/1kOxR6SSj7TB564OI4f-nZ-tX2JioyoBGEK_a498Swcc/edit';
-//     return message.channel.send(`The Beginner Progression Guide can be found here:\n${guideLink}`);
-//   }
-// };
-
-// const tls = {
-//   name: 'translations',
-//   group,
-//   aliases: ['tl', 'translation'],
-//   description: "Links Doli's Translation Sheet.",
-//   execute(message: Message) {
-//     const tlDocLink = 'https://docs.google.com/spreadsheets/d/1moWhlsmAFkmItRJPrhhi9qCYu8Y93sXGyS1ZBo2L38c/edit';
-//     return message.channel.send(`The main translation document can be found here:\n${tlDocLink}`);
-//   }
-// };
-
 const revenue = {
   name: 'revenue',
   group,
@@ -143,15 +91,17 @@ const revenue = {
   async execute(message: Message) {
     const revenue = new Attachment('./cron/revenue.png', 'revenue.png');
     const rank = new Attachment('./cron/revenue_rank.png', 'revenue_rank.png');
-    return message.channel.send(new RichEmbed()
-      .setTitle("World Flipper 當月營收")
-      .setColor(3447003)
-      .attachFiles([revenue, rank])
-      .setThumbnail('attachment://revenue_rank.png')
-      .setImage('attachment://revenue.png')
-      .setTimestamp());
+    return message.channel.send(
+      new RichEmbed()
+        .setTitle('World Flipper 當月營收')
+        .setColor(3447003)
+        .attachFiles([revenue, rank])
+        .setThumbnail('attachment://revenue_rank.png')
+        .setImage('attachment://revenue.png')
+        .setTimestamp()
+    );
   }
-}
+};
 
 // ---- tls ----
 
@@ -165,15 +115,19 @@ const tls = {
       'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5OvhecdUnTXEeO2fpdERfiZh3PzadSoGcpQ1IEhAPCSfcv2iLk7p0V7MFiZ7AZNnPVRSzUsRI5Wye/pubhtml#';
 
     const tlWeaponDoc = 'https://bbs.nga.cn/read.php?tid=19615906&rand=876';
-    const msg = (await message.channel.send(new RichEmbed()
-      .setTitle('角色中文翻譯')
-      .setColor(10181046) // purple
-      .setURL(tlCharDoc))) as Message;
+    const msg = (await message.channel.send(
+      new RichEmbed()
+        .setTitle('角色中文翻譯')
+        .setColor(10181046) // purple
+        .setURL(tlCharDoc)
+    )) as Message;
 
-    return msg.channel.send(new RichEmbed()
-      .setTitle('武器中文翻譯')
-      .setColor(3447003) // blue
-      .setURL(tlWeaponDoc));
+    return msg.channel.send(
+      new RichEmbed()
+        .setTitle('武器中文翻譯')
+        .setColor(3447003) // blue
+        .setURL(tlWeaponDoc)
+    );
   }
 };
 
@@ -190,9 +144,7 @@ const character = {
   async execute(message: Message, args: Array<string>) {
     const { func, newargs } = getCharacterSearchFunc(args);
 
-
     const { data, input } = await func(newargs);
-
 
     if (data.length === 0) {
       // Use includes
@@ -200,12 +152,12 @@ const character = {
       return message.channel.send('找不到辣!');
     }
 
-    const unit = (function () {
+    const unit = (function() {
       if (data.length === 1) {
         return data;
       }
 
-      const nameExact = data.filter(function (char: any) {
+      const nameExact = data.filter(function(char: any) {
         return char.ENName.toLowerCase() === input || char.CNName === input || char.JPName === input;
       });
 
@@ -214,7 +166,7 @@ const character = {
       }
 
       return data
-        .map(function (char: any, index: string) {
+        .map(function(char: any, index: string) {
           return `${parseInt(index, 10) +
             1}: (${char.CNAttribute}) ${char.CNName} ${char.JPName} [${(char.Nicknames && char.Nicknames.split(' ')[0]) ?? '沒有'}]`;
         })
@@ -227,7 +179,7 @@ const character = {
         max: 1,
         time: 15000
       });
-      collector.on('collect', function (m: any) {
+      collector.on('collect', function(m: any) {
         if (typeof data[m - 1] !== 'undefined') {
           sendCharacterMessage(data[m - 1], message);
           Promise.all([matches.delete(), m.delete()]);
@@ -236,9 +188,7 @@ const character = {
     } else {
       sendCharacterMessage(unit[0], message);
     }
-
   }
-
 };
 
 // ---- weapon ----
@@ -249,7 +199,7 @@ const weapon = {
   usage: '<武器名稱>',
   aliases: ['w', 'weapon'],
   description: '查詢武器資訊',
-  async execute(message: Message, args: Array<string>) { }
+  async execute(message: Message, args: Array<string>) {}
 };
 
 export default [rotation, tls, character, revenue];
