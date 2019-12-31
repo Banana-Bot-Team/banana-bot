@@ -19,30 +19,30 @@ const newyear = {
   description: '查詢新年協力PICKUP',
   execute(message: Message, args: Array<string>) {
     const attachments = [
-      './assets/charts/dark.png', // 31 = 0
-      './assets/charts/dark.png', // 1
-      './assets/charts/water.png',
-      './assets/charts/fire.png',
-      './assets/charts/dark.png',
-      './assets/charts/wind.png',
-      './assets/charts/thunder.png',
-      './assets/charts/light.png',
-      './assets/charts/water.png',
-      './assets/charts/fire.png',
-      './assets/charts/dark.png', // 10
-      './assets/charts/wind.png',
-      './assets/charts/thunder.png',
-      './assets/charts/light.png',
-      './assets/charts/water.png',
-      './assets/charts/fire.png',
-      './assets/charts/dark.png',
-      './assets/charts/wind.png',
-      './assets/charts/thunder.png',
-      './assets/charts/light.png',
-      './assets/charts/water.png', // 20
-      './assets/charts/fire.png',
-      './assets/charts/dark.png',
-      './assets/charts/dark.png'
+      './assets/newyear/dark.png', // 31 = 0
+      './assets/newyear/dark.png', // 1
+      './assets/newyear/water.png',
+      './assets/newyear/fire.png',
+      './assets/newyear/dark.png',
+      './assets/newyear/wind.png',
+      './assets/newyear/thunder.png',
+      './assets/newyear/light.png',
+      './assets/newyear/water.png',
+      './assets/newyear/fire.png',
+      './assets/newyear/dark.png', // 10
+      './assets/newyear/wind.png',
+      './assets/newyear/thunder.png',
+      './assets/newyear/light.png',
+      './assets/newyear/water.png',
+      './assets/newyear/fire.png',
+      './assets/newyear/dark.png',
+      './assets/newyear/wind.png',
+      './assets/newyear/thunder.png',
+      './assets/newyear/light.png',
+      './assets/newyear/water.png', // 20
+      './assets/newyear/fire.png',
+      './assets/newyear/dark.png',
+      './assets/newyear/dark.png'
     ];
     moment.tz.setDefault('GMT');
     // Current
