@@ -71,12 +71,13 @@ const newyear = {
         day = Number(args[0]) > 23 ? day : Number(args[0]);
       }
     }
-    const attachment = new Attachment(attachments[day], 'newyear.png');
+    let attachment;
     try {
-      return message.channel.send('', attachment);
-    }catch(err) {
-      return message.channel.send('', new Attachment(attachments[monentD], 'newyear.png'))
+      attachment = new Attachment(attachments[day], 'newyear.png');
+    } catch (err) {
+      attachment = new Attachment(attachments[monentD], 'newyear.png');
     }
+    return message.channel.send('', attachment);
   }
 };
 
