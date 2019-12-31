@@ -67,16 +67,10 @@ const newyear = {
           default:
             break;
         }
-      } else {
-        day = Number(args[0]) > 23 ? day : Number(args[0]);
       }
+      day = Number(args[0]) > 23 ? day : Number(args[0]);
     }
-    let attachment;
-    try {
-      attachment = new Attachment(attachments[day], 'newyear.png');
-    } catch (err) {
-      attachment = new Attachment(attachments[monentD], 'newyear.png');
-    }
+    const attachment = new Attachment(attachments[day] ?? attachments[monentD] ?? attachments[0], 'newyear.png');
     return message.channel.send('', attachment);
   }
 };
