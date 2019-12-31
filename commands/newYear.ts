@@ -16,7 +16,7 @@ const newyear = {
   args: false,
   usage: '<Day of Month>',
   aliases: ['ny'],
-  description: '查詢新年強化素材關',
+  description: '查詢新年協力PICKUP',
   execute(message: Message, args: Array<string>) {
     const attachments = [
       './assets/charts/dark.png', // 31 = 0
