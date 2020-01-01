@@ -21,26 +21,26 @@ const newyear = {
     const attachments = [
       './assets/newyear/dark.png', // 31 = 0
       './assets/newyear/dark.png', // 1
-      './assets/newyear/water.png',
-      './assets/newyear/fire.png',
-      './assets/newyear/dark.png',
       './assets/newyear/wind.png',
       './assets/newyear/thunder.png',
-      './assets/newyear/light.png',
+      './assets/newyear/dark.png',
       './assets/newyear/water.png',
       './assets/newyear/fire.png',
+      './assets/newyear/light.png',
+      './assets/newyear/wind.png',
+      './assets/newyear/thunder.png',
       './assets/newyear/dark.png', // 10
-      './assets/newyear/wind.png',
-      './assets/newyear/thunder.png',
-      './assets/newyear/light.png',
       './assets/newyear/water.png',
       './assets/newyear/fire.png',
-      './assets/newyear/dark.png',
+      './assets/newyear/light.png',
       './assets/newyear/wind.png',
       './assets/newyear/thunder.png',
-      './assets/newyear/light.png',
-      './assets/newyear/water.png', // 20
+      './assets/newyear/dark.png',
+      './assets/newyear/water.png',
       './assets/newyear/fire.png',
+      './assets/newyear/light.png',
+      './assets/newyear/wind.png', // 20
+      './assets/newyear/thunder.png',
       './assets/newyear/dark.png',
       './assets/newyear/dark.png'
     ];
@@ -48,7 +48,7 @@ const newyear = {
     // Current
     const monentD = Number(
       moment()
-        .add(4, 'h')
+        .subtract(9, 'h')
         .format('DD')
     );
     // Fallback
