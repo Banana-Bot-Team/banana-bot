@@ -146,18 +146,20 @@ const character = {
 
     const { data, input } = await func(newargs);
 
+    if (input.includes('banana') || input.includes('拔娜娜'))
+      return message.channel.send('請別輸入奇怪的東西!!');
+      
     if (data.length === 0) {
       // Use includes
-      if (input.includes('banana') || input.includes('拔娜娜')) return message.channel.send('請別輸入奇怪的東西!!');
       return message.channel.send('找不到辣!');
     }
 
-    const unit = (function() {
+    const unit = (function () {
       if (data.length === 1) {
         return data;
       }
 
-      const nameExact = data.filter(function(char: any) {
+      const nameExact = data.filter(function (char: any) {
         return char.ENName.toLowerCase() === input || char.CNName === input || char.JPName === input;
       });
 
@@ -166,7 +168,7 @@ const character = {
       }
 
       return data
-        .map(function(char: any, index: string) {
+        .map(function (char: any, index: string) {
           return `${parseInt(index, 10) +
             1}: (${char.CNAttribute}) ${char.CNName} ${char.JPName} [${(char.Nicknames && char.Nicknames.split(' ')[0]) ?? '沒有'}]`;
         })
@@ -179,7 +181,7 @@ const character = {
         max: 1,
         time: 15000
       });
-      collector.on('collect', function(m: any) {
+      collector.on('collect', function (m: any) {
         if (typeof data[m - 1] !== 'undefined') {
           sendCharacterMessage(data[m - 1], message);
           Promise.all([matches.delete(), m.delete()]);
@@ -199,7 +201,7 @@ const weapon = {
   usage: '<武器名稱>',
   aliases: ['w', 'weapon'],
   description: '查詢武器資訊',
-  async execute(message: Message, args: Array<string>) {}
+  async execute(message: Message, args: Array<string>) { }
 };
 
 export default [rotation, tls, character, revenue];
