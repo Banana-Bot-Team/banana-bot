@@ -75,21 +75,20 @@ export async function findSimilar(data: any, query: string) {
 }
 
 function getArtEmbed(unit: any) {
-  return new RichEmbed()
-    .setTitle(unit.CNName + ' ' + unit.JPName)
-    .setImage(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.SpriteURL)}`);
+  const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.SpriteURL)}`);
+  return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(image);
 }
 
 function getGifEmbed(unit: any) {
-  return new RichEmbed()
-    .setTitle(unit.CNName + ' ' + unit.JPName)
-    .setImage(`${process.env.ASSET_URL}${decodeURIComponent(unit.GifURL)}`);
+  const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.GifURL)}`);
+  return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(image);
 }
 
 function getInfoEmbed(unit: any) {
   const rarity = Array(parseInt(unit.Rarity, 10))
     .fill(':star:')
     .join('');
+  const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.SpriteURL)}`);
 
   return new RichEmbed()
     .setTitle(unit.CNName + ' ' + unit.JPName)
@@ -109,7 +108,7 @@ function getInfoEmbed(unit: any) {
     .addField('能力 1', unit.CNAbility1, true)
     .addField('能力 2', unit.CNAbility2, true)
     .addField('能力 3', unit.CNAbility3, true)
-    .setThumbnail(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.SpriteURL)}`)
+    .setThumbnail(image)
     .setFooter(unit.CNWeapon);
 }
 
