@@ -94,7 +94,9 @@ function getInfoEmbed(unit: any) {
     .setTitle(unit.CNName + ' ' + unit.JPName)
     .setDescription(
       '**屬性: **' +
-        unit.Attribute +
+        unit.JPAttribute +
+        ' ' +
+        unit.ENAttribute +
         '\n**隊長特性: **' +
         unit.CNLeaderBuff +
         '\n**技能: **' +
