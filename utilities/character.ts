@@ -64,7 +64,7 @@ export async function findSimilar(data: any, query: string) {
   });
 
   // Can be same chacters name
-  if (nameExact.length > 0) return nameExact;
+  if (nameExact.length === 1) return nameExact;
 
   return data
     .map(function(character: any, index: string) {
