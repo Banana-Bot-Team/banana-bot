@@ -44,9 +44,8 @@ export async function defaultSearch(message: Message, args: Array<string>) {
 
 export async function attributeSearch(message: Message, args: Array<string>) {
   let query = await filterInput(args, true);
-  query = query.replace('暗', '闇');
 
-  const res = await axios.get(`${CHARACTER_LOOKUP_URL}/attribute?name=${encodeURIComponent(query)}`);
+  const res = await axios.post(`${CHARACTER_LOOKUP_URL}/attribute?name=${encodeURIComponent(query)}`);
 
   return {
     data: res.data,
