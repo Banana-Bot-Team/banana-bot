@@ -68,7 +68,7 @@ export async function findSimilar(data: any, query: string) {
   return data
     .map(function(character: any, index: string) {
       return `${parseInt(index, 10) +
-        1}: (${character.CNAttribute}) ${character.CNName} ${character.JPName} [${(character.Nicknames && character.Nicknames.split(' ')[0]) ?? '沒有'}]`;
+        1}: (${character.CNAttribute}) ${character.CNName} ${character.JPName} [${(character.Nicknames && character.Nicknames[0]) ?? '沒有'}]`;
     })
     .join('\n');
 }
