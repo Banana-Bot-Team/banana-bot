@@ -6,7 +6,7 @@ export async function determineSearch(message: Message, args: Array<string>) {
   const isSubCommand = args?.[0]?.startsWith('-');
   if (isSubCommand) {
     // is find attributes
-    if (['a', 'attributes'].includes(args[0].replace(/^-/, ''))) {
+    if (['a', 'attribute'].includes(args[0].replace(/^-/, ''))) {
       return await attributeSearch(message, args);
     }
   }
