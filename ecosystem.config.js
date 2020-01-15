@@ -5,6 +5,6 @@ module.exports = {
     args: 'index.ts',
     autorestart: true,
     source_map_support: true,
-    watch: ['commands/**/*','data/**/*','source/**/*']
+    watch: ['commands/**/*','data/**/*','utilities/**/*']
   }]
 }
