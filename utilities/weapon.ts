@@ -88,10 +88,10 @@ function getInfoEmbed(unit: any) {
     .setTitle(unit.CNName + ' ' + unit.JPName)
     .setDescription(
       `**屬性: ** ${unit.JPAttribute} ${unit.ENAttribute}\n` +
-      `**稀有度: ** ${rarity}` +
+      `**稀有度: ** ${rarity}\n` +
       `**HP: ** ${Number(unit.Hp)} ${!!unit.MaxHp ? `( ${Number(unit.MaxHp)} )` : ''}\n` +
       `**ATK: ** ${Number(unit.Atk)} ${!!unit.MaxAtk ? `( ${Number(unit.MaxAtk)} )` : ''}\n` +
-      `**技能: ** ${unit.CNSkill.replace(/\//g, '\n')} ${!!unit.CNMaxSkill ? `( ${unit.CNMaxSkill} )` : ''}\n`
+      `**技能: ** \n${unit.CNSkill.replace(/\//g, '\n')} ${!!unit.CNMaxSkill ? `( ${unit.CNMaxSkill} )` : ''}`
     )
     .setThumbnail(image);
 }
