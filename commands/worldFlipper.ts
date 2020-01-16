@@ -1,7 +1,8 @@
 import { Attachment, Message, MessageCollector, RichEmbed } from 'discord.js';
 import * as moment from 'moment-timezone';
 import * as path from 'path';
-import { determineSearch, findSimilar, sendCharacterMessage } from '../utilities/character';
+import * as Character from '../utilities/character';
+import * as Weapon from '../utilities/weapon';
 
 // Command Group Name
 const group = path.parse(__filename).name;
@@ -130,7 +131,7 @@ const character = {
   aliases: ['c'],
   description: `查詢角色資訊\n**e.g.**\n${prefix}c <名稱>\n${prefix}c -a <屬性>`,
   async execute(message: Message, args: Array<string>) {
-    const { data, query } = await determineSearch(message, args);
+    const { data, query } = await Character.determineSearch(message, args);
 
     if (query.includes('banana') || query.includes('拔娜娜')) {
       // Use includes
@@ -141,7 +142,7 @@ const character = {
       return message.channel.send('找不到辣!');
     }
 
-    const unit = await findSimilar(data, query);
+    const unit = await Character.findSimilar(data, query);
 
     if (typeof unit === 'string') {
       const matches = (await message.channel.send('你可能在找：(請回覆號碼)\n```' + unit + '```\n')) as Message;
@@ -151,12 +152,12 @@ const character = {
       });
       collector.on('collect', function(m: any) {
         if (typeof data[m - 1] !== 'undefined') {
-          sendCharacterMessage(data[m - 1], message);
+          Character.sendCharacterMessage(data[m - 1], message);
           Promise.all([matches.delete(), m.delete()]);
         }
       });
     } else {
-      sendCharacterMessage(unit[0], message);
+      Character.sendCharacterMessage(unit[0], message);
     }
   }
 };
@@ -169,7 +170,36 @@ const weapon = {
   usage: '<武器名稱>',
   aliases: ['w', 'weapon'],
   description: '查詢武器資訊',
-  async execute(message: Message, args: Array<string>) {}
+  async execute(message: Message, args: Array<string>) {
+    const { data, query } = await Weapon.determineSearch(message, args);
+
+    if (query.includes('banana') || query.includes('拔娜娜')) {
+      // Use includes
+      return message.channel.send('請別輸入奇怪的東西!!');
+    }
+
+    if (data.length === 0) {
+      return message.channel.send('找不到辣!');
+    }
+
+    const unit = await Weapon.findSimilar(data, query);
+
+    if (typeof unit === 'string') {
+      const matches = (await message.channel.send('你可能在找：(請回覆號碼)\n```' + unit + '```\n')) as Message;
+      const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, {
+        max: 1,
+        time: 15000
+      });
+      collector.on('collect', function(m: any) {
+        if (typeof data[m - 1] !== 'undefined') {
+          Weapon.sendWeaponMessage(data[m - 1], message);
+          Promise.all([matches.delete(), m.delete()]);
+        }
+      });
+    } else {
+      Weapon.sendWeaponMessage(unit[0], message);
+    }
+  }
 };
 
-export default [rotation, tls, character, revenue];
+export default [rotation, tls, character, weapon, revenue];
