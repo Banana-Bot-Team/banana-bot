@@ -168,7 +168,7 @@ const weapon = {
   group,
   args: true,
   usage: '<武器名稱>',
-  aliases: ['w', 'weapon'],
+  aliases: ['w'],
   description: '查詢武器資訊',
   async execute(message: Message, args: Array<string>) {
     const { data, query } = await Weapon.determineSearch(message, args);
