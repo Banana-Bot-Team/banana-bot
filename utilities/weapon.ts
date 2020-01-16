@@ -18,7 +18,7 @@ export async function filterInput(args: Array<string> = [], isSubCommand: boolea
   if (isSubCommand) args = args.slice(1);
   let str = args.join(' ').toLowerCase();
 
-  str = INVALID_CHAR.reduce(function(str: string, regex: RegExp) {
+  str = INVALID_CHAR.reduce(function (str: string, regex: RegExp) {
     return str.replace(regex, '');
   }, str);
 
@@ -58,7 +58,7 @@ export async function findSimilar(data: any, query: string) {
   if (data.length === 1) return data;
 
   // If the name is exactly same as query, it should be the one you find
-  const nameExact = data.filter(function(weapon: any) {
+  const nameExact = data.filter(function (weapon: any) {
     return weapon.CNName === query || weapon.JPName === query || weapon.ENName === query;
   });
 
@@ -66,7 +66,7 @@ export async function findSimilar(data: any, query: string) {
   if (nameExact.length === 1) return nameExact;
 
   return data
-    .map(function(weapon: any, index: string) {
+    .map(function (weapon: any, index: string) {
       return `${parseInt(index, 10) +
         1}: (${weapon.CNAttribute}) ${weapon.CNName} ${weapon.JPName} [${(weapon.Nicknames && weapon.Nicknames[0]) ?? '沒有'}]`;
     })
@@ -87,11 +87,11 @@ function getInfoEmbed(unit: any) {
   return new RichEmbed()
     .setTitle(unit.CNName + ' ' + unit.JPName)
     .setDescription(
-      `**屬性: ** ${unit.JPAttribute} ${unit.ENAttribute}
-**技能: ** ${unit.CNSkill} ${!!unit.CNMaxSkill ? `( ${unit.CNMaxSkill} )` : ''} 
-**HP: ** ${Number(unit.Hp)} ${!!unit.MaxHp ? `( ${Number(unit.MaxHp)} )` : ''}
-**ATK: ** ${Number(unit.Atk)} ${!!unit.MaxAtk ? `( ${Number(unit.MaxAtk)} )` : ''}
-**稀有度: ** ${rarity}`
+      `**屬性: ** ${unit.JPAttribute} ${unit.ENAttribute}\n` +
+      `**稀有度: ** ${rarity}` +
+      `**HP: ** ${Number(unit.Hp)} ${!!unit.MaxHp ? `( ${Number(unit.MaxHp)} )` : ''}\n` +
+      `**ATK: ** ${Number(unit.Atk)} ${!!unit.MaxAtk ? `( ${Number(unit.MaxAtk)} )` : ''}\n` +
+      `**技能: ** ${unit.CNSkill.replace(/\//g, '\n')} ${!!unit.CNMaxSkill ? `( ${unit.CNMaxSkill} )` : ''}\n`
     )
     .setThumbnail(image);
 }
@@ -105,7 +105,7 @@ export async function sendWeaponMessage(unit: any, message: Message) {
   const infoReaction = 'ℹ️';
   const reactionExpiry = 30000;
 
-  const filter = function(reaction: MessageReaction, user: User) {
+  const filter = function (reaction: MessageReaction, user: User) {
     return [artReaction, infoReaction].includes(reaction.emoji.name) && user.id === message.author.id;
   };
 
