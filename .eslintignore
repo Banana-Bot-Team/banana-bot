@@ -4,6 +4,7 @@ node_modules
 **/*.d.ts
 **/*.js.map
 **/*.js
+!cron/*.js
 
 !src/decorators/**/*.d.ts
 
