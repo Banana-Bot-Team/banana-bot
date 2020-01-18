@@ -84,6 +84,20 @@ function getInfoEmbed(unit: any) {
     .join('');
   const image = encodeURI(`${WEAPON_ASSETS_URL}${decodeURIComponent(unit.ImgUrl)}`);
 
+  const re = /([0-9]*\.)?[0-9]+/g;
+
+  let arr, skill = "";
+  let i = 0;
+
+  do {
+    arr = re.exec(unit.CNSkill);
+    
+    if(arr) {
+      skill += unit.CNSkill.slice(i, arr.index) + arr[0] + ` (${Math.round(Number(arr[0]) * 2)})`;
+      i = arr.index + arr[0].length;
+    }
+  } while (arr);
+
   return new RichEmbed()
     .setTitle(unit.CNName + ' ' + unit.JPName)
     .setDescription(
@@ -91,7 +105,7 @@ function getInfoEmbed(unit: any) {
       `**稀有度: ** ${rarity}\n` +
       `**HP: ** ${Number(unit.Hp)} ${!!unit.MaxHp ? `( ${Number(unit.MaxHp)} )` : ''}\n` +
       `**ATK: ** ${Number(unit.Atk)} ${!!unit.MaxAtk ? `( ${Number(unit.MaxAtk)} )` : ''}\n` +
-      `**技能: ** \n${unit.CNSkill.replace(/\//g, '\n')} ${!!unit.CNMaxSkill ? `( ${unit.CNMaxSkill} )` : ''}`
+      `**技能: ** \n${skill.replace(/\//g, '\n')}` //${!!unit.CNMaxSkill ? `( ${unit.CNMaxSkill} )` : ''}`
     )
     .setThumbnail(image);
 }
