@@ -12,6 +12,9 @@ const URL =
   const page = await browser.newPage();
 
   try {
+    await page.setUserAgent(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3419.0 Safari/537.36'
+    );
     await page.goto(URL, { waitUntil: ['load', 'domcontentloaded'], timeout: 0 });
 
     const svg = await page.$('svg');
