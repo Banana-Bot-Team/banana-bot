@@ -121,9 +121,7 @@ export class CharacterSearchBuilder {
     if (this.data.length === 0) return this.message.channel.send('找不到辣!');
 
     if (typeof this.result === 'string') {
-      const matches = (await this.message.channel.send(
-        '你可能在找：(請回覆號碼)\n```' + this.result + '```\n'
-      )) as Message;
+      const matches = (await this.message.channel.send(this.SelectContext)) as Message;
       const collector = new MessageCollector(this.message.channel, m => m.author.id === this.message.author.id, {
         max: 1,
         time: 15000
@@ -138,6 +136,21 @@ export class CharacterSearchBuilder {
     } else {
       this.actualSend();
     }
+  }
+
+  get SelectContext() {
+    let context = '你可能在找：(請回覆號碼)\n```' + this.result + '```\n';
+    if (context.length > 2000) {
+      let result: any = this.data.slice(0, 20);
+      result = result
+        .map(function(character: any, index: string) {
+          return `${parseInt(index, 10) +
+            1}: (${character.CNAttribute}) ${character.CNName} ${character.JPName} [${(character.Nicknames && character.Nicknames[0]) ?? '沒有'}]`;
+        })
+        .join('\n');
+      context = '你可能在找：(請回覆號碼)\n```' + result + '```\n找到太多結果，僅顯示其中的前二十個';
+    }
+    return context;
   }
 
   async actualSend() {
