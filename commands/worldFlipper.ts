@@ -127,11 +127,12 @@ const character = {
   name: 'character',
   group,
   args: true,
-  usage: '[-a] <名稱>',
+  usage: '[-attribute/a <屬性>] [-ability/abi <能力>] <名稱>',
   aliases: ['c'],
   description: `查詢角色資訊\n**e.g.**\n${prefix}c <名稱>\n${prefix}c -a <屬性> -abi <能力>`,
   async execute(message: Message, args: Array<string>) {
-    await (await new CharacterSearchBuilder(message, args).search()).similar().send();
+    const result = await new CharacterSearchBuilder(message, args).search();
+    await result.similar().send();
   }
 };
 
