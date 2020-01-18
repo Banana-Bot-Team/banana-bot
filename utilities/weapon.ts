@@ -97,6 +97,8 @@ function getInfoEmbed(unit: any) {
       i = arr.index + arr[0].length;
     }
   } while (arr);
+  
+  skill += unit.CNSkill.slice(i);
 
   return new RichEmbed()
     .setTitle(unit.CNName + ' ' + unit.JPName)
