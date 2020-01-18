@@ -1,7 +1,7 @@
 import { Attachment, Message, MessageCollector, RichEmbed } from 'discord.js';
 import * as moment from 'moment-timezone';
 import * as path from 'path';
-import * as Character from '../utilities/character';
+import { CharacterSearchBuilder } from '../utilities/character';
 import * as Weapon from '../utilities/weapon';
 
 // Command Group Name
@@ -131,34 +131,7 @@ const character = {
   aliases: ['c'],
   description: `查詢角色資訊\n**e.g.**\n${prefix}c <名稱>\n${prefix}c -a <屬性> -abi <能力>`,
   async execute(message: Message, args: Array<string>) {
-    const { data, query } = await Character.determineSearch(message, args);
-
-    if (query.includes('banana') || query.includes('拔娜娜')) {
-      // Use includes
-      return message.channel.send('請別輸入奇怪的東西!!');
-    }
-
-    if (data.length === 0) {
-      return message.channel.send('找不到辣!');
-    }
-
-    const unit = await Character.findSimilar(data, query);
-
-    if (typeof unit === 'string') {
-      const matches = (await message.channel.send('你可能在找：(請回覆號碼)\n```' + unit + '```\n')) as Message;
-      const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, {
-        max: 1,
-        time: 15000
-      });
-      collector.on('collect', function(m: any) {
-        if (typeof data[m - 1] !== 'undefined') {
-          Character.sendCharacterMessage(data[m - 1], message);
-          Promise.all([matches.delete(), m.delete()]);
-        }
-      });
-    } else {
-      Character.sendCharacterMessage(unit[0], message);
-    }
+    await (await new CharacterSearchBuilder(message, args).search()).similar().send();
   }
 };
 

@@ -1,160 +1,218 @@
 import axios from 'axios';
-import { Message, MessageReaction, RichEmbed, TextChannel, User } from 'discord.js';
+import { Message, MessageReaction, RichEmbed, TextChannel, User, MessageCollector } from 'discord.js';
 import { CHARACTER_ASSETS_URL, CHARACTER_LOOKUP_URL, INVALID_CHAR } from './constants';
 
-export async function determineSearch(message: Message, args: Array<string>) {
-  const isSubCommand = args?.[0]?.startsWith('-');
-  if (isSubCommand) {
-    // is find attributes
-    if (['a', 'attribute'].includes(args[0].replace(/^-/, ''))) {
-      return await attributeSearch(message, args);
+export class CharacterSearchBuilder {
+  message: Message;
+  name: string = '';
+  attribute: string = '';
+  ability: string = '';
+  data: Array<any> = [];
+  result: Array<any> | string = [];
+  selected: number = 0;
+
+  get query() {
+    const query = [];
+    if (this.name.trim() !== '' && !!this.name) {
+      query.push({
+        key: 'name',
+        value: this.name
+      });
     }
-    // is find abilities
-    if (['abi', 'ability'].includes(args[0].replace(/^-/, ''))) {
-      return await abilitiesSearch(message, args);
+    if (this.attribute.trim() !== '' && !!this.attribute) {
+      query.push({
+        key: 'attribute',
+        value: this.attribute
+      });
+    }
+    if (this.ability.trim() !== '' && !!this.ability) {
+      query.push({
+        key: 'ability',
+        value: this.ability
+      });
+    }
+    return query.reduce(function(query, pair, index) {
+      if (index !== 0) query = query + '&';
+      return query + '' + pair.key + '=' + encodeURIComponent(pair.value);
+    }, '');
+  }
+
+  constructor(message: Message, args: Array<string>) {
+    this.message = message;
+    this.parser(message, args);
+  }
+
+  parser(message: Message, args: Array<string>) {
+    this.message = message;
+    const removeArray: Array<number> = [];
+    args.map((text: string, index: number) => {
+      const isSubCommand = text.startsWith('-');
+      const subCommand = text.replace(/^-/, '');
+      if (isSubCommand) {
+        if (['a', 'attribute'].includes(subCommand)) {
+          this.attribute = this.filter(args?.[index + 1] ?? '');
+          removeArray.push(index);
+        }
+        if (['abi', 'ability'].includes(subCommand)) {
+          this.ability = this.filter(args?.[index + 1] ?? '');
+          removeArray.push(index);
+        }
+      }
+    });
+    args = removeArray.reduce(function(args, point: number, index: number) {
+      args.splice(point - index * 2, 2);
+      return args;
+    }, args);
+    this.name = this.filter(args?.[0] ?? '');
+
+    return this;
+  }
+
+  filter(text: string) {
+    text = INVALID_CHAR.reduce(function(str: string, regex: RegExp) {
+      return str.replace(regex, '');
+    }, text);
+
+    // Allow Emoji
+    if (text.startsWith('<') && text.endsWith('>')) {
+      const matches = Array.from(text.match(/<:(.+?):.+?>/) ?? []);
+      text = matches.length === 2 ? `:${matches[1]}:` : '';
+    }
+
+    return text;
+  }
+
+  async search() {
+    const res = await axios.post(`${CHARACTER_LOOKUP_URL}/lookup?${this.query}`);
+
+    this.data = res.data;
+
+    return this;
+  }
+
+  similar() {
+    // If only 1 item, it should be the one you find
+    if (this.data.length === 1) {
+      this.result = this.data;
+      return this;
+    }
+
+    // If the name is exactly same as query, it should be the one you find
+    const nameExact = this.data.filter((character: any) => {
+      return character.CNName === this.name || character.JPName === this.name;
+    });
+
+    // Can be same chacters name
+    if (nameExact.length === 1) {
+      this.result = nameExact;
+      return this;
+    }
+
+    this.result = (this.data as any)
+      .map(function(character: any, index: string) {
+        return `${parseInt(index, 10) +
+          1}: (${character.CNAttribute}) ${character.CNName} ${character.JPName} [${(character.Nicknames && character.Nicknames[0]) ?? '沒有'}]`;
+      })
+      .join('\n');
+    return this;
+  }
+
+  async send() {
+    if (this.data.length === 0) return this.message.channel.send('找不到辣!');
+
+    if (typeof this.result === 'string') {
+      const matches = (await this.message.channel.send(
+        '你可能在找：(請回覆號碼)\n```' + this.result + '```\n'
+      )) as Message;
+      const collector = new MessageCollector(this.message.channel, m => m.author.id === this.message.author.id, {
+        max: 1,
+        time: 15000
+      });
+      collector.on('collect', (m: any) => {
+        if (typeof this.data[m - 1] !== 'undefined') {
+          this.selected = m - 1;
+          this.actualSend();
+          Promise.all([matches.delete(), m.delete()]);
+        }
+      });
+    } else {
+      this.actualSend();
     }
   }
-  // default
-  return await defaultSearch(message, args);
-}
 
-export async function filterInput(args: Array<string> = [], isSubCommand: boolean = false): Promise<string> {
-  if (isSubCommand) args = args.slice(1);
-  let str = args.join(' ').toLowerCase();
+  async actualSend() {
+    const artReaction = '🎨';
+    const infoReaction = 'ℹ️';
+    const gifReaction = '🎥';
+    const reactionExpiry = 30000;
 
-  str = INVALID_CHAR.reduce(function(str: string, regex: RegExp) {
-    return str.replace(regex, '');
-  }, str);
+    const filter = (reaction: MessageReaction, user: User) => {
+      return (
+        [artReaction, infoReaction, gifReaction].includes(reaction.emoji.name) && user.id === this.message.author.id
+      );
+    };
 
-  // Allow Emoji
-  if (str.startsWith('<') && str.endsWith('>')) {
-    const matches = Array.from(str.match(/<:(.+?):.+?>/) ?? []);
-    str = matches.length === 2 ? `:${matches[1]}:` : '';
+    const msg = (await (this.message.channel as TextChannel).send(this.InfoEmbed)) as Message;
+    await msg.react(artReaction);
+    await msg.react(infoReaction);
+    await msg.react(gifReaction);
+
+    const collector = msg.createReactionCollector(filter, { max: 10, time: reactionExpiry });
+    collector.on('collect', r => {
+      if (r.emoji.name === artReaction) {
+        msg.edit(this.ArtEmbed);
+      }
+      if (r.emoji.name === infoReaction) {
+        msg.edit(this.InfoEmbed);
+      }
+      if (r.emoji.name === gifReaction) {
+        msg.edit(this.GifEmbed);
+      }
+    });
+
+    collector.on('end', () => msg.clearReactions());
   }
 
-  return str;
-}
+  get ArtEmbed() {
+    const unit = this.data[this.selected];
+    const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.SpriteURL)}`);
+    return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(image);
+  }
 
-export async function defaultSearch(message: Message, args: Array<string>) {
-  let query = await filterInput(args, false);
+  get GifEmbed() {
+    const unit = this.data[this.selected];
+    const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.GifURL)}`);
+    return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(image);
+  }
 
-  const res = await axios.post(`${CHARACTER_LOOKUP_URL}/lookup?name=${encodeURIComponent(query)}`);
+  get InfoEmbed() {
+    const unit = this.data[this.selected];
+    const rarity = Array(parseInt(unit.Rarity, 10))
+      .fill(':star:')
+      .join('');
+    const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.SpriteURL)}`);
 
-  return {
-    data: res.data,
-    query
-  };
-}
-
-export async function attributeSearch(message: Message, args: Array<string>) {
-  let query = await filterInput(args, true);
-
-  const res = await axios.post(`${CHARACTER_LOOKUP_URL}/attribute?name=${encodeURIComponent(query)}`);
-
-  return {
-    data: res.data,
-    query
-  };
-}
-
-export async function abilitiesSearch(message: Message, args: Array<string>) {
-  let query = await filterInput(args, true);
-
-  const res = await axios.post(`${CHARACTER_LOOKUP_URL}/abilities?name=${encodeURIComponent(query)}`);
-
-  return {
-    data: res.data,
-    query
-  };
-}
-
-export async function findSimilar(data: any, query: string) {
-  // If only 1 item, it should be the one you find
-  if (data.length === 1) return data;
-
-  // If the name is exactly same as query, it should be the one you find
-  const nameExact = data.filter(function(character: any) {
-    return character.CNName === query || character.JPName === query;
-  });
-
-  // Can be same chacters name
-  if (nameExact.length === 1) return nameExact;
-
-  return data
-    .map(function(character: any, index: string) {
-      return `${parseInt(index, 10) +
-        1}: (${character.CNAttribute}) ${character.CNName} ${character.JPName} [${(character.Nicknames && character.Nicknames[0]) ?? '沒有'}]`;
-    })
-    .join('\n');
-}
-
-function getArtEmbed(unit: any) {
-  const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.SpriteURL)}`);
-  return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(image);
-}
-
-function getGifEmbed(unit: any) {
-  const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.GifURL)}`);
-  return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(image);
-}
-
-function getInfoEmbed(unit: any) {
-  const rarity = Array(parseInt(unit.Rarity, 10))
-    .fill(':star:')
-    .join('');
-  const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.SpriteURL)}`);
-
-  return new RichEmbed()
-    .setTitle(unit.CNName + ' ' + unit.JPName)
-    .setDescription(
-      '**屬性: **' +
-        unit.JPAttribute +
-        ' ' +
-        unit.ENAttribute +
-        '\n**隊長特性: **' +
-        unit.CNLeaderBuff +
-        '\n**技能: **' +
-        unit.CNSkillName +
-        (unit.SkillCost ? ' **Cost: **' + unit.SkillCost : '') +
-        '\n' +
-        unit.CNSkillDesc +
-        '\n**稀有度: **' +
-        rarity
-    )
-    .addField('能力 1', unit.CNAbility1, true)
-    .addField('能力 2', unit.CNAbility2, true)
-    .addField('能力 3', unit.CNAbility3, true)
-    .setThumbnail(image)
-    .setFooter(unit.CNWeapon);
-}
-
-export async function sendCharacterMessage(unit: any, message: Message) {
-  const artReaction = '🎨';
-  const infoReaction = 'ℹ️';
-  const gifReaction = '🎥';
-  const reactionExpiry = 30000;
-
-  const filter = function(reaction: MessageReaction, user: User) {
-    return [artReaction, infoReaction, gifReaction].includes(reaction.emoji.name) && user.id === message.author.id;
-  };
-
-  const msg = (await (message.channel as TextChannel).send(getInfoEmbed(unit))) as Message;
-  await msg.react(artReaction);
-  await msg.react(infoReaction);
-  await msg.react(gifReaction);
-
-  const collector = msg.createReactionCollector(filter, { max: 10, time: reactionExpiry });
-  collector.on('collect', r => {
-    if (r.emoji.name === artReaction) {
-      msg.edit(getArtEmbed(unit));
-    }
-    if (r.emoji.name === infoReaction) {
-      msg.edit(getInfoEmbed(unit));
-    }
-    if (r.emoji.name === gifReaction) {
-      msg.edit(getGifEmbed(unit));
-    }
-  });
-
-  collector.on('end', () => msg.clearReactions());
+    return new RichEmbed()
+      .setTitle(unit.CNName + ' ' + unit.JPName)
+      .setDescription(
+        '**屬性: **' +
+          unit.JPAttribute +
+          ' ' +
+          unit.ENAttribute +
+          '\n**隊長特性: **' +
+          unit.CNLeaderBuff +
+          '\n**技能: **' +
+          unit.CNSkillName +
+          (unit.SkillCost ? ' **Cost: **' + unit.SkillCost : '') +
+          '\n' +
+          unit.CNSkillDesc +
+          '\n**稀有度: **' +
+          rarity
+      )
+      .addField('能力 1', unit.CNAbility1, true)
+      .addField('能力 2', unit.CNAbility2, true)
+      .addField('能力 3', unit.CNAbility3, true)
+      .setThumbnail(image)
+      .setFooter(unit.CNWeapon);
+  }
 }
