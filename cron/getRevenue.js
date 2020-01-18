@@ -12,7 +12,7 @@ const URL =
   const page = await browser.newPage();
 
   try {
-    await page.goto(URL, { waitUntil: 'networkidle0', timeout: 0 });
+    await page.goto(URL, { waitUntil: ['load', 'domcontentloaded', 'networkidle0'], timeout: 0 });
 
     const svg = await page.$('svg');
 
