@@ -9,6 +9,10 @@ export async function determineSearch(message: Message, args: Array<string>) {
     if (['a', 'attribute'].includes(args[0].replace(/^-/, ''))) {
       return await attributeSearch(message, args);
     }
+    // is find abilities
+    if (['abi', 'ability'].includes(args[0].replace(/^-/, ''))) {
+      return await abilitiesSearch(message, args);
+    }
   }
   // default
   return await defaultSearch(message, args);
@@ -46,6 +50,17 @@ export async function attributeSearch(message: Message, args: Array<string>) {
   let query = await filterInput(args, true);
 
   const res = await axios.post(`${CHARACTER_LOOKUP_URL}/attribute?name=${encodeURIComponent(query)}`);
+
+  return {
+    data: res.data,
+    query
+  };
+}
+
+export async function abilitiesSearch(message: Message, args: Array<string>) {
+  let query = await filterInput(args, true);
+
+  const res = await axios.post(`${CHARACTER_LOOKUP_URL}/abilities?name=${encodeURIComponent(query)}`);
 
   return {
     data: res.data,

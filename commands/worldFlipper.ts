@@ -129,7 +129,7 @@ const character = {
   args: true,
   usage: '[-a] <名稱>',
   aliases: ['c'],
-  description: `查詢角色資訊\n**e.g.**\n${prefix}c <名稱>\n${prefix}c -a <屬性>`,
+  description: `查詢角色資訊\n**e.g.**\n${prefix}c <名稱>\n${prefix}c -a <屬性> -abi <能力>`,
   async execute(message: Message, args: Array<string>) {
     const { data, query } = await Character.determineSearch(message, args);
 
