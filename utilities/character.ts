@@ -31,7 +31,7 @@ export class CharacterSearchBuilder {
         value: this.ability
       });
     }
-    return query.reduce(function(query, pair, index) {
+    return query.reduce(function (query, pair, index) {
       if (index !== 0) query = query + '&';
       return query + '' + pair.key + '=' + encodeURIComponent(pair.value);
     }, '');
@@ -59,7 +59,7 @@ export class CharacterSearchBuilder {
         }
       }
     });
-    args = removeArray.reduce(function(args, point: number, index: number) {
+    args = removeArray.reduce(function (args, point: number, index: number) {
       args.splice(point - index * 2, 2);
       return args;
     }, args);
@@ -69,7 +69,7 @@ export class CharacterSearchBuilder {
   }
 
   filter(text: string) {
-    text = INVALID_CHAR.reduce(function(str: string, regex: RegExp) {
+    text = INVALID_CHAR.reduce(function (str: string, regex: RegExp) {
       return str.replace(regex, '');
     }, text);
 
@@ -109,7 +109,7 @@ export class CharacterSearchBuilder {
     }
 
     this.result = (this.data as any)
-      .map(function(character: any, index: string) {
+      .map(function (character: any, index: string) {
         return `${parseInt(index, 10) +
           1}: (${character.CNAttribute}) ${character.CNName} ${character.JPName} [${(character.Nicknames && character.Nicknames[0]) ?? '沒有'}]`;
       })
@@ -143,7 +143,7 @@ export class CharacterSearchBuilder {
     if (context.length > 2000) {
       let result: any = this.data.slice(0, 20);
       result = result
-        .map(function(character: any, index: string) {
+        .map(function (character: any, index: string) {
           return `${parseInt(index, 10) +
             1}: (${character.CNAttribute}) ${character.CNName} ${character.JPName} [${(character.Nicknames && character.Nicknames[0]) ?? '沒有'}]`;
         })
@@ -208,19 +208,13 @@ export class CharacterSearchBuilder {
     return new RichEmbed()
       .setTitle(unit.CNName + ' ' + unit.JPName)
       .setDescription(
-        '**屬性: **' +
-          unit.JPAttribute +
-          ' ' +
-          unit.ENAttribute +
-          '\n**隊長特性: **' +
-          unit.CNLeaderBuff +
-          '\n**技能: **' +
-          unit.CNSkillName +
-          (unit.SkillCost ? ' **Cost: **' + unit.SkillCost : '') +
-          '\n' +
-          unit.CNSkillDesc +
-          '\n**稀有度: **' +
-          rarity
+        `**屬性:** ${unit.JPAttribute} ${unit.ENAttribute}` +
+        `\n**隊長特性:** ${unit.CNLeaderBuff}` +
+        `\n**技能:**' ${unit.CNSkillName}` +
+        (unit.SkillCost ? ` **Cost:** ${unit.SkillCost}` : '') +
+        `\n${unit.CNSkillDesc}` +
+        `\n**稀有度:**' ${rarity}` +
+        (unit.CNGet ? `\n**取得方式:** ${unit.CNGet}` : '')
       )
       .addField('能力 1', unit.CNAbility1, true)
       .addField('能力 2', unit.CNAbility2, true)
