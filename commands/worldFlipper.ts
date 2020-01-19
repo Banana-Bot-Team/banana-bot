@@ -2,7 +2,7 @@ import { Attachment, Message, MessageCollector, RichEmbed } from 'discord.js';
 import * as moment from 'moment-timezone';
 import * as path from 'path';
 import { CharacterSearchBuilder } from '../utilities/character';
-import * as Weapon from '../utilities/weapon';
+import { WeaponSearchBuilder } from '../utilities/weapon';
 
 // Command Group Name
 const group = path.parse(__filename).name;
@@ -145,34 +145,8 @@ const weapon = {
   aliases: ['w'],
   description: '查詢武器資訊',
   async execute(message: Message, args: Array<string>) {
-    const { data, query } = await Weapon.determineSearch(message, args);
-
-    if (query.includes('banana') || query.includes('拔娜娜')) {
-      // Use includes
-      return message.channel.send('請別輸入奇怪的東西!!');
-    }
-
-    if (data.length === 0) {
-      return message.channel.send('找不到辣!');
-    }
-
-    const unit = await Weapon.findSimilar(data, query);
-
-    if (typeof unit === 'string') {
-      const matches = (await message.channel.send('你可能在找：(請回覆號碼)\n```' + unit + '```\n')) as Message;
-      const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, {
-        max: 1,
-        time: 15000
-      });
-      collector.on('collect', function(m: any) {
-        if (typeof data[m - 1] !== 'undefined') {
-          Weapon.sendWeaponMessage(data[m - 1], message);
-          Promise.all([matches.delete(), m.delete()]);
-        }
-      });
-    } else {
-      Weapon.sendWeaponMessage(unit[0], message);
-    }
+    const result = await new WeaponSearchBuilder(message, args).search();
+    await result.similar().send();
   }
 };
 
