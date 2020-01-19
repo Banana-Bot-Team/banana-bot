@@ -210,10 +210,10 @@ export class CharacterSearchBuilder {
       .setDescription(
         `**屬性:** ${unit.JPAttribute} ${unit.ENAttribute}` +
         `\n**隊長特性:** ${unit.CNLeaderBuff}` +
-        `\n**技能:**' ${unit.CNSkillName}` +
+        `\n**技能:** ${unit.CNSkillName}` +
         (unit.SkillCost ? ` **Cost:** ${unit.SkillCost}` : '') +
         `\n${unit.CNSkillDesc}` +
-        `\n**稀有度:**' ${rarity}` +
+        `\n**稀有度:** ${rarity}` +
         (unit.CNGet ? `\n**取得方式:** ${unit.CNGet}` : '')
       )
       .addField('能力 1', unit.CNAbility1, true)
