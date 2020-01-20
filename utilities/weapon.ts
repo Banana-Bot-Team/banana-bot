@@ -83,6 +83,7 @@ export class WeaponSearchBuilder extends SearchBuilder {
       .setDescription(
         `**屬性: ** ${unit.JPAttribute} ${unit.ENAttribute}` +
         `\n**稀有度: ** ${rarity}` +
+        (!!unit.CNGet ? `\n**取得方式: ** ${unit.CNGet}` : '') +
         `\n**HP: ** ${Number(unit.Hp)} ${!!unit.MaxHp ? `( ${Number(unit.MaxHp)} )` : ''}` +
         `\n**ATK: ** ${Number(unit.Atk)} ${!!unit.MaxAtk ? `( ${Number(unit.MaxAtk)} )` : ''}` +
         `\n**技能: ** \n${skill.replace(/\//g, '\n')}` //${!!unit.CNMaxSkill ? `( ${unit.CNMaxSkill} )` : ''}`
