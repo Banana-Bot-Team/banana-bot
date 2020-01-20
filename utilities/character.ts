@@ -4,7 +4,6 @@ import { CHARACTER_ASSETS_URL, CHARACTER_LOOKUP_URL } from './constants';
 import { SearchBuilder } from './builder';
 
 export class CharacterSearchBuilder extends SearchBuilder {
-
   constructor(message: Message, args: Array<string>) {
     super(message, args);
   }
@@ -36,7 +35,7 @@ export class CharacterSearchBuilder extends SearchBuilder {
     }
 
     this.result = (this.data as any)
-      .map(function (character: any, index: string) {
+      .map(function(character: any, index: string) {
         return `${parseInt(index, 10) +
           1}: (${character.CNAttribute}) ${character.CNName} ${character.JPName} [${(character.Nicknames && character.Nicknames[0]) ?? '沒有'}]`;
       })
@@ -67,12 +66,12 @@ export class CharacterSearchBuilder extends SearchBuilder {
       .setTitle(unit.CNName + ' ' + unit.JPName)
       .setDescription(
         `**屬性: ** ${unit.JPAttribute} ${unit.ENAttribute}` +
-        `\n**隊長特性: ** ${unit.CNLeaderBuff}` +
-        `\n**技能: ** ${unit.CNSkillName}` +
-        (unit.SkillCost ? ` **Cost: ** ${unit.SkillCost}` : '') +
-        `\n${unit.CNSkillDesc}` +
-        `\n**稀有度: ** ${rarity}` +
-        (unit.CNGet ? `\n**取得方式: ** ${unit.CNGet}` : '')
+          `\n**隊長特性: ** ${unit.CNLeaderBuff}` +
+          `\n**技能: ** ${unit.CNSkillName}` +
+          (unit.SkillCost ? ` **Cost: ** ${unit.SkillCost}` : '') +
+          `\n${unit.CNSkillDesc}` +
+          `\n**稀有度: ** ${rarity}` +
+          (unit.CNGet ? `\n**取得方式: ** ${unit.CNGet}` : '')
       )
       .addField('能力 1', unit.CNAbility1, true)
       .addField('能力 2', unit.CNAbility2, true)

@@ -4,7 +4,6 @@ import { WEAPON_ASSETS_URL, WEAPON_LOOKUP_URL } from './constants';
 import { SearchBuilder } from './builder';
 
 export class WeaponSearchBuilder extends SearchBuilder {
-
   constructor(message: Message, args: Array<string>) {
     super(message, args, false);
   }
@@ -36,7 +35,7 @@ export class WeaponSearchBuilder extends SearchBuilder {
     }
 
     this.result = (this.data as any)
-      .map(function (weapon: any, index: string) {
+      .map(function(weapon: any, index: string) {
         return `${parseInt(index, 10) +
           1}: (${weapon.CNAttribute}) ${weapon.CNName} ${weapon.JPName} [${(weapon.Nicknames && weapon.Nicknames[0]) ?? '沒有'}]`;
       })
@@ -64,7 +63,8 @@ export class WeaponSearchBuilder extends SearchBuilder {
 
     const re = /([0-9]*\.)?[0-9]+/g;
 
-    let arr, skill = "";
+    let arr,
+      skill = '';
     let i = 0;
 
     do {
@@ -82,11 +82,11 @@ export class WeaponSearchBuilder extends SearchBuilder {
       .setTitle(unit.CNName + ' ' + unit.JPName)
       .setDescription(
         `**屬性: ** ${unit.JPAttribute} ${unit.ENAttribute}` +
-        `\n**稀有度: ** ${rarity}` +
-        (!!unit.CNGet ? `\n**取得方式: ** ${unit.CNGet}` : '') +
-        `\n**HP: ** ${Number(unit.Hp)} ${!!unit.MaxHp ? `( ${Number(unit.MaxHp)} )` : ''}` +
-        `\n**ATK: ** ${Number(unit.Atk)} ${!!unit.MaxAtk ? `( ${Number(unit.MaxAtk)} )` : ''}` +
-        `\n**技能: ** \n${skill.replace(/\//g, '\n')}` //${!!unit.CNMaxSkill ? `( ${unit.CNMaxSkill} )` : ''}`
+          `\n**稀有度: ** ${rarity}` +
+          (unit.CNGet ? `\n**取得方式: ** ${unit.CNGet}` : '') +
+          `\n**HP: ** ${Number(unit.Hp)} ${unit.MaxHp ? `( ${Number(unit.MaxHp)} )` : ''}` +
+          `\n**ATK: ** ${Number(unit.Atk)} ${unit.MaxAtk ? `( ${Number(unit.MaxAtk)} )` : ''}` +
+          `\n**技能: ** \n${skill.replace(/\//g, '\n')}` //${!!unit.CNMaxSkill ? `( ${unit.CNMaxSkill} )` : ''}`
       )
       .setThumbnail(image);
   }
