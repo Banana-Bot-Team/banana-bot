@@ -2,6 +2,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import * as fs from 'fs';
+import { revenue } from './cron/revenue';
 
 // Initial Discord Client
 import * as Discord from 'discord.js';
@@ -31,6 +32,7 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
   const botVersion = process.env.npm_package_version ? ` v${process.env.npm_package_version}` : '';
+  revenue.start();
   console.log(`===== WorldBot${botVersion} ready =====`);
   console.log(`Logged in as '${client.user.tag}' (${client.user.id})`);
 });
@@ -61,7 +63,7 @@ client.on('message', async function(message: Discord.Message) {
     );
 
     if (command.args && !args.length) {
-      let reply = "請輸入參數!";
+      let reply = '請輸入參數!';
       if (command.usage) {
         reply += `\n用法 ${prefix}${command.name} ${command.usage}`;
       }

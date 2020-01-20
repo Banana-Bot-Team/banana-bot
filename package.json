@@ -10,7 +10,13 @@
   "author": "KaKa",
   "license": "GPL-3.0",
   "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/cron": "^1.7.1",
+    "@types/moment-timezone": "^0.5.12",
+    "@types/node": "^13.1.8",
+    "@types/puppeteer": "^2.0.0",
     "axios": "^0.19.1",
+    "cron": "^1.8.1",
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "moment-timezone": "^0.5.27",
@@ -18,8 +24,6 @@
     "puppeteer": "^2.0.0"
   },
   "devDependencies": {
-    "@types/moment-timezone": "^0.5.12",
-    "@types/node": "^13.1.8",
     "@typescript-eslint/eslint-plugin": "^2.16.0",
     "@typescript-eslint/parser": "^2.16.0",
     "eslint": "^6.8.0",
