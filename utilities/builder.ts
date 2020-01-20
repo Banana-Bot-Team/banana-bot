@@ -10,15 +10,15 @@ export abstract class SearchBuilder {
   result: Array<any> | string = [];
   selected: number = 0;
 
-  abstract search(): Promise<SearchBuilder>
+  abstract search(): Promise<SearchBuilder>;
 
-  abstract similar(): SearchBuilder
+  abstract similar(): SearchBuilder;
 
-  abstract get ArtEmbed(): RichEmbed
+  abstract get ArtEmbed(): RichEmbed;
 
-  abstract get GifEmbed(): RichEmbed
+  abstract get GifEmbed(): RichEmbed;
 
-  abstract get InfoEmbed(): RichEmbed
+  abstract get InfoEmbed(): RichEmbed;
 
   get query() {
     const query = [];
@@ -40,7 +40,7 @@ export abstract class SearchBuilder {
         value: this.ability
       });
     }
-    return query.reduce(function (query, pair, index) {
+    return query.reduce(function(query, pair, index) {
       if (index !== 0) query = query + '&';
       return query + '' + pair.key + '=' + encodeURIComponent(pair.value);
     }, '');
@@ -68,7 +68,7 @@ export abstract class SearchBuilder {
         }
       }
     });
-    args = removeArray.reduce(function (args, point: number, index: number) {
+    args = removeArray.reduce(function(args, point: number, index: number) {
       args.splice(point - index * 2, 2);
       return args;
     }, args);
@@ -78,7 +78,7 @@ export abstract class SearchBuilder {
   }
 
   filter(text: string) {
-    text = INVALID_CHAR.reduce(function (str: string, regex: RegExp) {
+    text = INVALID_CHAR.reduce(function(str: string, regex: RegExp) {
       return str.replace(regex, '');
     }, text);
 
@@ -117,7 +117,7 @@ export abstract class SearchBuilder {
     if (context.length > 2000) {
       let result: any = this.data.slice(0, 20);
       result = result
-        .map(function (character: any, index: string) {
+        .map(function(character: any, index: string) {
           return `${parseInt(index, 10) +
             1}: (${character.CNAttribute}) ${character.CNName} ${character.JPName} [${(character.Nicknames && character.Nicknames[0]) ?? '沒有'}]`;
         })
@@ -143,7 +143,7 @@ export abstract class SearchBuilder {
     await msg.react(artReaction);
     await msg.react(infoReaction);
 
-    this.hasGIF && await msg.react(gifReaction);
+    this.hasGIF && (await msg.react(gifReaction));
 
     const collector = msg.createReactionCollector(filter, { max: 10, time: reactionExpiry });
     collector.on('collect', r => {
