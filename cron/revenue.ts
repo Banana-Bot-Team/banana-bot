@@ -6,7 +6,7 @@ const URL =
   'http://game-i.daa.jp/?%E3%82%A2%E3%83%97%E3%83%AA%2F%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%83%95%E3%83%AA%E3%83%83%E3%83%91%E3%83%BC%28WORLD%20FLIPPER%29';
 
 export const revenue = new CronJob(
-  '0 0 */2 * * *',
+  '0 */2 * * *',
   async function() {
     const browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--single-process']
