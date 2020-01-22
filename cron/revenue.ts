@@ -18,12 +18,12 @@ export const revenue = new CronJob(
 
       const svg = await page.$('svg');
 
-      !!svg && (await svg.screenshot({ path: path.join(__dirname, 'revenue.png') }));
+      await svg?.screenshot({ path: path.join(__dirname, 'revenue.png') });
 
       const table = await page.$$('.style_table');
       const rank = await table[1].$('tbody');
 
-      !!rank && (await rank.screenshot({ path: path.join(__dirname, 'revenue_rank.png') }));
+      await rank?.screenshot({ path: path.join(__dirname, 'revenue_rank.png') });
     } catch (e) {
       console.error(e);
     } finally {
