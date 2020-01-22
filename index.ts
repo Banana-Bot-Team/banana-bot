@@ -2,6 +2,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import * as fs from 'fs';
+import * as moment from 'moment-timezone';
 import { revenue } from './cron/revenue';
 
 // Initial Discord Client
@@ -33,7 +34,7 @@ for (const file of commandFiles) {
 client.once('ready', () => {
   const botVersion = process.env.npm_package_version ? ` v${process.env.npm_package_version}` : '';
   revenue.start();
-  console.log(`===== WorldBot${botVersion} ready =====`);
+  console.log(`===== BananaBot${botVersion} ready =====  ${moment.tz('Asia/Tokyo').format('MMM D YYYY, h:mm:ss a')}`);
   console.log(`Logged in as '${client.user.tag}' (${client.user.id})`);
 });
 
