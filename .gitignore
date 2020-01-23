@@ -1,11 +1,11 @@
 node_modules
 node_modules/
+cron/*.png
 package-lock.json
 yarn.lock
 .DS_Store
 dist
 
 .env
-coverage
 
 *.py

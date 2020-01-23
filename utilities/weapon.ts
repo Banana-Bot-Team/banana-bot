@@ -86,7 +86,9 @@ export class WeaponSearchBuilder extends SearchBuilder {
           (unit.CNGet ? `\n**取得方式: ** ${unit.CNGet}` : '') +
           `\n**HP: ** ${Number(unit.Hp)} ${unit.MaxHp ? `( ${Number(unit.MaxHp)} )` : ''}` +
           `\n**ATK: ** ${Number(unit.Atk)} ${unit.MaxAtk ? `( ${Number(unit.MaxAtk)} )` : ''}` +
-          `\n**技能: ** \n${skill.replace(/\//g, '\n')}` //${!!unit.CNMaxSkill ? `( ${unit.CNMaxSkill} )` : ''}`
+          `\n**技能: ** \n**- **${!!unit.CNSkill 
+            ? skill.replace(/\//g, '\n**- **') 
+            : (!!unit.CNMaxSkill ? unit.CNMaxSkill.replace(/\//g, '\n**- **') : '')}`
       )
       .setThumbnail(image);
   }
