@@ -81,8 +81,8 @@ const revenue = {
   aliases: ['rev'],
   description: '查看WF營收',
   async execute(message: Message) {
-    const revenue = new Attachment('./cron/revenue.png', 'revenue.png');
-    const rank = new Attachment('./cron/revenue_rank.png', 'revenue_rank.png');
+    const revenue = new Attachment('./assets/revenue.png', 'revenue.png');
+    const rank = new Attachment('./assets/revenue_rank.png', 'revenue_rank.png');
     return message.channel.send(
       new RichEmbed()
         .setTitle('World Flipper 當月營收')
