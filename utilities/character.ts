@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from './axios';
 import { Message, RichEmbed } from 'discord.js';
-import { CHARACTER_ASSETS_URL, CHARACTER_LOOKUP_URL } from './constants';
+import { CHARACTER_ASSETS_URL, CHARACTER_PREFIX } from './constants';
 import { SearchBuilder } from './builder';
 
 export class CharacterSearchBuilder extends SearchBuilder {
@@ -9,7 +9,7 @@ export class CharacterSearchBuilder extends SearchBuilder {
   }
 
   async search() {
-    const res = await axios.post(`${CHARACTER_LOOKUP_URL}/lookup?${this.query}`);
+    const res = await axios.then(axios => axios.post(`/${CHARACTER_PREFIX}/lookup?${this.query}`));
 
     this.data = res.data;
 

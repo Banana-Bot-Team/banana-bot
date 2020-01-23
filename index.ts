@@ -13,9 +13,6 @@ const prefix = process.env.PREFIX ?? '!!';
 
 client.commands = new Discord.Collection();
 
-// Initial Data
-global.BossWeaponsData = require('./data/BossWeapons');
-
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.ts'));
 
 for (const file of commandFiles) {
@@ -87,6 +84,7 @@ declare global {
     interface Global {
       BossWeaponsData: Array<any>;
       commands: Array<any>;
+      API_JWT_TOKEN: string;
     }
   }
 }

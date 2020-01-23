@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from './axios';
 import { Message, RichEmbed } from 'discord.js';
-import { WEAPON_ASSETS_URL, WEAPON_LOOKUP_URL } from './constants';
+import { WEAPON_ASSETS_URL, WEAPON_PREFIX } from './constants';
 import { SearchBuilder } from './builder';
 
 export class WeaponSearchBuilder extends SearchBuilder {
@@ -9,7 +9,7 @@ export class WeaponSearchBuilder extends SearchBuilder {
   }
 
   async search() {
-    const res = await axios.post(`${WEAPON_LOOKUP_URL}/lookup?${this.query}`);
+    const res = await axios.then(axios => axios.post(`/${WEAPON_PREFIX}/lookup?${this.query}`));
 
     this.data = res.data;
 
@@ -86,9 +86,13 @@ export class WeaponSearchBuilder extends SearchBuilder {
           (unit.CNGet ? `\n**取得方式: ** ${unit.CNGet}` : '') +
           `\n**HP: ** ${Number(unit.Hp)} ${unit.MaxHp ? `( ${Number(unit.MaxHp)} )` : ''}` +
           `\n**ATK: ** ${Number(unit.Atk)} ${unit.MaxAtk ? `( ${Number(unit.MaxAtk)} )` : ''}` +
-          `\n**技能: ** \n**- **${!!unit.CNSkill 
-            ? skill.replace(/\//g, '\n**- **') 
-            : (!!unit.CNMaxSkill ? unit.CNMaxSkill.replace(/\//g, '\n**- **') : '')}`
+          `\n**技能: ** \n**- **${
+            unit.CNSkill
+              ? skill.replace(/\//g, '\n**- **')
+              : unit.CNMaxSkill
+              ? unit.CNMaxSkill.replace(/\//g, '\n**- **')
+              : ''
+          }`
       )
       .setThumbnail(image);
   }
