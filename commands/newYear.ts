@@ -19,7 +19,7 @@ const newyear = {
   description: '查詢新年協力PICKUP',
   execute(message: Message, args: Array<string>) {
     const attachments = [
-      './assets/newyear/water.png', // 31 = 0
+      './assets/newyear/fire.png', // 31 = 0
       './assets/newyear/fire.png', // 1
       './assets/newyear/wind.png',
       './assets/newyear/thunder.png',
@@ -43,13 +43,13 @@ const newyear = {
       './assets/newyear/thunder.png',
       './assets/newyear/dark.png',
       './assets/newyear/water.png',
-      './assets/newyear/fire.png',
       './assets/newyear/water.png',
       './assets/newyear/fire.png',
       './assets/newyear/water.png',
       './assets/newyear/fire.png',
       './assets/newyear/water.png',
-      './assets/newyear/fire.png' // 30
+      './assets/newyear/fire.png',
+      './assets/newyear/water.png' // 30
     ];
     moment.tz.setDefault('GMT');
     // Current
