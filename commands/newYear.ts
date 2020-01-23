@@ -19,8 +19,8 @@ const newyear = {
   description: '查詢新年協力PICKUP',
   execute(message: Message, args: Array<string>) {
     const attachments = [
-      './assets/newyear/dark.png', // 31 = 0
-      './assets/newyear/dark.png', // 1
+      './assets/newyear/water.png', // 31 = 0
+      './assets/newyear/fire.png', // 1
       './assets/newyear/wind.png',
       './assets/newyear/thunder.png',
       './assets/newyear/dark.png',
@@ -42,7 +42,14 @@ const newyear = {
       './assets/newyear/wind.png', // 20
       './assets/newyear/thunder.png',
       './assets/newyear/dark.png',
-      './assets/newyear/dark.png'
+      './assets/newyear/water.png',
+      './assets/newyear/fire.png',
+      './assets/newyear/water.png',
+      './assets/newyear/fire.png',
+      './assets/newyear/water.png',
+      './assets/newyear/fire.png',
+      './assets/newyear/water.png',
+      './assets/newyear/fire.png' // 30
     ];
     moment.tz.setDefault('GMT');
     // Current
@@ -52,7 +59,7 @@ const newyear = {
         .format('DD')
     );
     // Fallback
-    let day = monentD > 23 ? 0 : monentD;
+    let day = monentD > 30 ? 0 : monentD;
     // Input
     if (Array.isArray(args) && args.length > 0) {
       if (isNaN(Number(args[0]))) {
@@ -67,8 +74,9 @@ const newyear = {
           default:
             break;
         }
-      } else
-        day = Number(args[0]) > 23 ? day : Number(args[0]);
+      } else {
+        day = Number(args[0]) > 31 ? day : Number(args[0]);
+      }
     }
     const attachment = new Attachment(attachments[day] ?? attachments[monentD] ?? attachments[0], 'newyear.png');
     return message.channel.send('', attachment);
