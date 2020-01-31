@@ -45,13 +45,13 @@ export class CharacterSearchBuilder extends SearchBuilder {
 
   get ArtEmbed() {
     const unit = this.data[this.selected];
-    const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.SpriteURL)}`);
+    const image = encodeURI(`${decodeURIComponent(unit.ImgFullShotURL)}`);
     return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(image);
   }
 
   get GifEmbed() {
     const unit = this.data[this.selected];
-    const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.GifURL)}`);
+    const image = encodeURI(`${decodeURIComponent(unit.ImgSpecialURL)}`);
     return new RichEmbed().setTitle(unit.CNName + ' ' + unit.JPName).setImage(image);
   }
 
@@ -60,7 +60,7 @@ export class CharacterSearchBuilder extends SearchBuilder {
     const rarity = Array(parseInt(unit.Rarity, 10))
       .fill(':star:')
       .join('');
-    const image = encodeURI(`${CHARACTER_ASSETS_URL}${decodeURIComponent(unit.SpriteURL)}`);
+    const image = encodeURI(`${decodeURIComponent(unit.ImgSquareURL)}`);
 
     return new RichEmbed()
       .setTitle(unit.CNName + ' ' + unit.JPName)
