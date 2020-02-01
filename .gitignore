@@ -7,5 +7,3 @@ yarn.lock
 dist
 
 .env
-
-*.py
