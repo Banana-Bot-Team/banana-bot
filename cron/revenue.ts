@@ -37,4 +37,4 @@ export async function revenueFunction() {
   }
 }
 
-export const revenue = new CronJob('5 */2 * * *', revenueFunction, async function() {}, false, 'Asia/Tokyo');
+export const revenue = new CronJob('1 */2 * * *', revenueFunction, async function() {}, false, 'Asia/Tokyo');
