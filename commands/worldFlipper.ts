@@ -53,45 +53,27 @@ const rotation = {
       './assets/charts/thunder.png',
       './assets/charts/dark.png'
     ];
-    moment.tz.setDefault('GMT');
-    const monentW = String(
-      moment()
-        .add(4, 'h')
-        .format('ddd')
-    ).toLowerCase();
-    let dayOfWeek = DAYOFWEEK[monentW];
-    if (Array.isArray(args) && args.length > 0) {
-      // replace chinese mutation
-      let arg = String(args[0]).toLowerCase();
-      arg = arg
-        .replace('周末', '星期六')
-        .replace('禮拜', '星期')
-        .replace('拜', '星期')
-        .replace('週', '星期');
-      dayOfWeek = DAYOFWEEK[arg] ?? dayOfWeek;
-    }
-    const attachment = new Attachment(attachments[dayOfWeek] ?? attachments[DAYOFWEEK[monentW]], 'all.png');
-    return message.channel.send('', attachment);
-  }
-};
+    // moment.tz.setDefault('GMT');
+    // const monentW = String(
+    //   moment()
+    //     .add(4, 'h')
+    //     .format('ddd')
+    // ).toLowerCase();
+    // let dayOfWeek = DAYOFWEEK[monentW];
+    // if (Array.isArray(args) && args.length > 0) {
+    //   // replace chinese mutation
+    //   let arg = String(args[0]).toLowerCase();
+    //   arg = arg
+    //     .replace('周末', '星期六')
+    //     .replace('禮拜', '星期')
+    //     .replace('拜', '星期')
+    //     .replace('週', '星期');
+    //   dayOfWeek = DAYOFWEEK[arg] ?? dayOfWeek;
+    // }
+    // const attachment = new Attachment(attachments[dayOfWeek] ?? attachments[DAYOFWEEK[monentW]], 'all.png');
+    const attachment = new Attachment(attachments[0]);
 
-const revenue = {
-  name: 'revenue',
-  group,
-  aliases: ['rev'],
-  description: '查看WF營收',
-  async execute(message: Message) {
-    const revenue = new Attachment('./assets/revenue.png', 'revenue.png');
-    const rank = new Attachment('./assets/revenue_rank.png', 'revenue_rank.png');
-    return message.channel.send(
-      new RichEmbed()
-        .setTitle('World Flipper 當月營收')
-        .setColor(3447003)
-        .attachFiles([revenue, rank])
-        .setThumbnail('attachment://revenue_rank.png')
-        .setImage('attachment://revenue.png')
-        .setTimestamp()
-    );
+    return message.channel.send('', attachment);
   }
 };
 
@@ -150,4 +132,4 @@ const weapon = {
   }
 };
 
-export default [rotation, tls, character, weapon, revenue];
+export default [rotation, tls, character, weapon];
