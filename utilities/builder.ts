@@ -85,7 +85,8 @@ export abstract class SearchBuilder {
     // Allow Emoji
     if (text.startsWith('<') && text.endsWith('>')) {
       const matches = Array.from(text.match(/<:(.+?):.+?>/) ?? []);
-      text = matches.length === 2 ? `:${matches[1]}:` : '';
+      text = matches.length === 2 ? matches[1] : '';
+      text = Array.from(text.split('__'))[0];
     }
 
     return text;
