@@ -78,16 +78,16 @@ export abstract class SearchBuilder {
   }
 
   filter(text: string) {
-    text = INVALID_CHAR.reduce(function(str: string, regex: RegExp) {
-      return str.replace(regex, '');
-    }, text);
-
-    // Allow Emoji
+    // Allow Emoji (handle text before remove invalid characters)
     if (text.startsWith('<') && text.endsWith('>')) {
       const matches = Array.from(text.match(/<:(.+?):.+?>/) ?? []);
       text = matches.length === 2 ? matches[1] : '';
       text = Array.from(text.split('__'))[0];
     }
+
+    text = INVALID_CHAR.reduce(function(str: string, regex: RegExp) {
+      return str.replace(regex, '');
+    }, text);
 
     return text;
   }
