@@ -80,7 +80,7 @@ export abstract class SearchBuilder {
   filter(text: string) {
     // Allow Emoji (handle text before remove invalid characters)
     if (text.startsWith('<') && text.endsWith('>')) {
-      const matches = Array.from(text.match(/<:(.+?):.+?>/) ?? []);
+      const matches = Array.from(text.match(/<a?:(.+?):.+?>/) ?? []);
       text = matches.length === 2 ? matches[1] : '';
       text = Array.from(text.split('__'))[0];
     }
