@@ -61,7 +61,8 @@ export class WeaponSearchBuilder extends SearchBuilder {
       .join('');
     const image = encodeURI(`${WEAPON_ASSETS_URL}${decodeURIComponent(unit.ImgUrl)}`);
 
-    const re = /([0-9]*\.)?[0-9]+/g;
+    const re = /([0-9]*\.)?[0-9]+\s*[%％]/g;
+    const reNum = /([0-9]*\.)?[0-9]+/g;
 
     let arr,
       skill = '';
@@ -71,7 +72,8 @@ export class WeaponSearchBuilder extends SearchBuilder {
       arr = re.exec(unit.CNSkill);
 
       if (arr) {
-        skill += unit.CNSkill.slice(i, arr.index) + arr[0] + ` (${Math.round(Number(arr[0]) * 2)})`;
+        const num = reNum.exec(arr[0])![0];
+        skill += unit.CNSkill.slice(i, arr.index) + num + ` (${Math.round(Number(num) * 2)}) %`;
         i = arr.index + arr[0].length;
       }
     } while (arr);
