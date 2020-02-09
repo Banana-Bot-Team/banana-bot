@@ -72,8 +72,10 @@ export class WeaponSearchBuilder extends SearchBuilder {
       arr = re.exec(unit.CNSkill);
 
       if (arr) {
-        const num = reNum.exec(arr[0])![0];
-        skill += unit.CNSkill.slice(i, arr.index) + num + ` (${Math.round(Number(num) * 2)}) %`;
+        let num = arr[0].match(reNum)?.[0];
+        
+        skill += unit.CNSkill.slice(i, arr.index) + (num ? num + ` (${Math.round(Number(num) * 2)}) %` : arr[0]);
+
         i = arr.index + arr[0].length;
       }
     } while (arr);
