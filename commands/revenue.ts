@@ -20,6 +20,16 @@ async function sendRevenue(message: Message, title: string, prefix: string = '')
   );
 }
 
+const touhoulerevenue = {
+  name: 'touhourevenue',
+  group,
+  aliases: ['thr', 'thlwr', 'threv'],
+  description: '查看 東方LostWord 營收',
+  async execute(message: Message) {
+    await sendRevenue(message, '東方 LostWord', 'touhoulw_');
+  }
+};
+
 const gbfrevenue = {
   name: 'gbfrevenue',
   group,

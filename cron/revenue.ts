@@ -8,6 +8,9 @@ const WF_URL =
 const GBF_URL =
   'http://game-i.daa.jp/?%E3%82%A2%E3%83%97%E3%83%AA%2F%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%96%E3%83%AB%E3%83%BC%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC';
 
+const TOUHOULW_URL =
+  'http://game-i.daa.jp/?cmd=read&page=%E3%82%A2%E3%83%97%E3%83%AA%2F%E6%9D%B1%E6%96%B9LostWord&word=%E6%9D%B1%E6%96%B9';
+
 export async function revenueFunction() {
   const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--single-process']
@@ -30,6 +33,7 @@ export async function revenueFunction() {
   try {
     await getShot(WF_URL);
     await getShot(GBF_URL, 'gbf_');
+    await getShot(TOUHOULW_URL, 'touhoulw_')
   } catch (e) {
     console.error(e);
   } finally {
