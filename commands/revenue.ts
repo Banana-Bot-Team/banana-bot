@@ -50,4 +50,4 @@ const wfrevenue = {
   }
 };
 
-export default [gbfrevenue, wfrevenue];
+export default [gbfrevenue, wfrevenue, touhoulerevenue];
