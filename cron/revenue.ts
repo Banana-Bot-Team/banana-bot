@@ -3,7 +3,7 @@ import * as puppeteer from 'puppeteer';
 import * as path from 'path';
 
 const WF_URL =
-  'http://game-i.daa.jp/?%E3%82%A2%E3%83%97%E3%83%AA%2F%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%83%95%E3%83%AA%E3%83%83%E3%83%91%E3%83%BC%28WORLD%20FLIPPER%29';
+  'http://game-i.daa.jp/?%E3%82%A2%E3%83%97%E3%83%AA/%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%83%95%E3%83%AA%E3%83%83%E3%83%91%E3%83%BC%28WORLD+FLIPPER%29';
 
 const GBF_URL =
   'http://game-i.daa.jp/?%E3%82%A2%E3%83%97%E3%83%AA%2F%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%96%E3%83%AB%E3%83%BC%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC';
@@ -13,7 +13,7 @@ const TOUHOULW_URL =
 
 export async function revenueFunction() {
   const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--single-process']
+    args: ['--no-sandbox', '--disable-setuid-sandbox', /*'--single-process'*/]
   });
   const page = await browser.newPage();
 
@@ -31,9 +31,9 @@ export async function revenueFunction() {
   }
 
   try {
+    await getShot(TOUHOULW_URL, 'touhoulw_');
     await getShot(WF_URL);
     await getShot(GBF_URL, 'gbf_');
-    await getShot(TOUHOULW_URL, 'touhoulw_')
   } catch (e) {
     console.error(e);
   } finally {
